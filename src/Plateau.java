@@ -8,4 +8,6 @@ public class Plateau{
     Plateau(){
     }
 
+    public static void affichage(){
+    }
 }

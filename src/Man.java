@@ -58,4 +58,11 @@
  * pour chaque erreur, on pioche une boule de plus
  * si la balle dorée est tirée, elle est comme un jocker
  * si une ligne est composée alors MOTUS ==> perdu
+ * 
+ * 
+ * 
+ * 
+ * Humain vs Humain
+ * Humain vs IA
+ * IA vs Humain
  */
