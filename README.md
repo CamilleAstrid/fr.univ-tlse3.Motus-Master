@@ -32,7 +32,7 @@ Ce dépôt contient le code associé au jeu motus. Ce projet a été réalisé d
 🚧
 
 ## Licence
-Ce projet et donc l'ensemble des éléments de ce répertoire est sous licence [MIT](https://github.com/CamilleAstrid/fr.univ-tlse3_motus_project/blob/main/LICENSE) (sauf cas précisé).
+Ce projet et donc l'ensemble des éléments de ce répertoire est sous licence [MIT](https://github.com/CamilleAstrid/fr.univ-tlse3_motus_project/blob/master/LICENSE) (sauf cas précisé).
 
 ## Citations et Références
 
