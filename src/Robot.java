@@ -1,15 +1,8 @@
-import java.util.Scanner;
-
 public class Robot implements Joueur{
     @Override
-    public String definirMot() {
-        int taille_mot;
+    public String definirMot(int nb_letters) {
    
-        Scanner taille = new Scanner(System.in);
-        System.out.println("Entrez la taille du mot que vous souhaitez deviner: ");
-        taille_mot = taille.nextInt();
-        taille.close();
-        String File = "fr.univ-tlse3.motus_project/data/mots_" + taille_mot + "_lettres";
+        String File = "fr.univ-tlse3.Motus-Master/data/mots_" + nb_letters + "_lettres.csv";
 
         Load_data mots = new Load_data(File);
         mots.generate();
@@ -18,7 +11,7 @@ public class Robot implements Joueur{
 
     @Override
     public String proposerMot(int taille, String motSecret) {
-        String File = "fr.univ-tlse3.motus_project/data/mots_" + taille + "_lettres";
+        String File = "fr.univ-tlse3.Motus-Master/data/mots_" + taille + "_lettres.csv";
         Load_data mots = new Load_data(File);
         mots.generate();
 

@@ -4,22 +4,25 @@ import java.util.Scanner;
 public class Humain implements Joueur{
     String motPropose;
     String motSecret;
+    String motSecretLisibleCSV;
+
+    public String motSecretLisibleCSV(String motSecret){
+        motSecretLisibleCSV = motSecret.toLowerCase();
+        motSecretLisibleCSV = motSecretLisibleCSV.concat(",");
+        return motSecretLisibleCSV;
+    }
 
     @Override
-    public String definirMot() {
-        int taille_mot;
+    public String definirMot(int nb_letters) {
    
         Scanner scan = new Scanner(System.in);
-        System.out.println("Entrez la taille du mot que vous souhaitez faire deviner: ");
-        taille_mot = scan.nextInt();
         System.out.println("Entrez le mot que vous souhaitez faire deviner: ");
         motSecret = scan.next();
-
-        String File = "fr.univ-tlse3.motus_project/data/mots_" + taille_mot + "_lettres";
+        String File = "fr.univ-tlse3.Motus-Master/data/mots_" + nb_letters + "_lettres.csv";
         Load_data mots = new Load_data(File);
         mots.generate();
-
-        while (!mots.liste.contains(motSecret)){
+        motSecretLisibleCSV = motSecretLisibleCSV(motSecret);
+        while (!mots.liste.contains(motSecretLisibleCSV)){
             System.out.println("Le mot n'est pas dans la liste. Il faut choisir un autre mot.");
             System.out.println("Entrez le mot que vous souhaitez faire deviner: ");
             motSecret = scan.next();
@@ -43,7 +46,7 @@ public class Humain implements Joueur{
             Results.main("loose");
         }
         else {
-            Plateau.affichage();
+            Plateau.affichage(taille, false);
         }
 
         scan.close();
