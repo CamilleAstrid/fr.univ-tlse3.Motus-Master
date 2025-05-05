@@ -17,7 +17,7 @@ public class Robot implements Joueur {
     @Override
     public String definirMot(int nb_letters) {
         String File = "fr.univ-tlse3.Motus-Master/data/mots_" + nb_letters + "_lettres.csv";
-        Load_data mots = new Load_data(File);
+        LoadData mots = new LoadData(File);
         mots.generate();
         motSecret = mots.motSecret;
         return motSecret;
@@ -26,7 +26,7 @@ public class Robot implements Joueur {
     @Override
     public String proposerMot(int taille, String motSecret, int iteration, ArrayList<String> badLetters) {
         String File = "fr.univ-tlse3.Motus-Master/data/mots_" + taille + "_lettres.csv";
-        Load_data mots = new Load_data(File);
+        LoadData mots = new LoadData(File);
         mots.generate();
         
         if (iteration == 0) {
