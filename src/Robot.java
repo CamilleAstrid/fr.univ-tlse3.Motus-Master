@@ -1,34 +1,58 @@
-public class Robot implements Joueur{
+import java.util.ArrayList;
+
+public class Robot implements Joueur {
+    String motPropose;
+    String motSecret;
+    ArrayList<String> liste = new ArrayList<>();
+
+    // Constructeur
+    public Robot() {
+        // Constructeur de la classe Robot
+        this.motPropose = motPropose;
+        this.motSecret = motSecret;
+        this.liste = liste;
+    }
+
+    // Méthodes
     @Override
     public String definirMot(int nb_letters) {
-   
         String File = "fr.univ-tlse3.Motus-Master/data/mots_" + nb_letters + "_lettres.csv";
-
         Load_data mots = new Load_data(File);
         mots.generate();
-        return mots.motSecret;
+        motSecret = mots.motSecret;
+        return motSecret;
     }
 
     @Override
-    public String proposerMot(int taille, String motSecret) {
+    public String proposerMot(int taille, String motSecret, int iteration, ArrayList<String> badLetters) {
         String File = "fr.univ-tlse3.Motus-Master/data/mots_" + taille + "_lettres.csv";
         Load_data mots = new Load_data(File);
         mots.generate();
-
-        int index = (int)(Math.random() * mots.nbLigne);
-        String motPropose = mots.liste.get(index);
-
-        while (motPropose.charAt(0) != motSecret.charAt(0)){
-            if (motPropose.charAt(0) > motSecret.charAt(0)){
-                index = (int)index/2;
-                motPropose = mots.liste.get(index);
+        
+        if (iteration == 0) {
+            for (String mot : mots.liste) {
+                if (mot.charAt(0) == motSecret.charAt(0)) {
+                    liste.add(mot);
+                }
+                if (mot.charAt(0) > motSecret.charAt(0)) {
+                    break;
+                }
             }
-            else {
-                index = (int)index + (mots.nbLigne - index)/2;
-                motPropose = mots.liste.get(index);
+            motPropose = liste.get(0);
+        } else {
+            for (String mot : mots.liste) {
+                String motTemp = mot;
+                for (String badLetter : badLetters) {
+                    if (motTemp.contains(badLetter)) {
+                        mots.liste.remove(motTemp);
+                        break;
+                    }
+                }
             }
+            motPropose = liste.get(0);
         }
-        mots.liste.remove(index);
+        
         return motPropose;
     }
-}
+}  
+

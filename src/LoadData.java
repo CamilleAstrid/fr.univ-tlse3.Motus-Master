@@ -3,14 +3,14 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class Load_data {
+public class LoadData {
     String File;
     ArrayList<String> liste;
     int max;
     int nbLigne=0;
-    String motSecret;
+    String motSecret="motus";
 
-    Load_data(String File){
+    LoadData(String File){
         this.File = File;
         this.liste = new ArrayList<String>();
         this.max = nbLigne;
@@ -22,7 +22,7 @@ public class Load_data {
             BufferedReader buf = new BufferedReader(new FileReader(File));
             String read = buf.readLine();
             while(read != null){
-                liste.add(read);
+                this.liste.add(read);
                 nbLigne++;
                 read = buf.readLine();
             }
@@ -31,8 +31,9 @@ public class Load_data {
         catch (IOException e){
             e.printStackTrace();
         }
+        this.max = nbLigne;
         int index = (int)(Math.random() * nbLigne);
-        motSecret = liste.get(index);
+        this.motSecret = liste.get(index);
     }
 
 }

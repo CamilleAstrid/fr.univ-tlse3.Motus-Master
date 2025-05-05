@@ -1,97 +1,122 @@
-/**
- * @see Main
- */
 import java.util.Scanner;
 
-public class Plateau{
-    static Case[][] grille;
-    static int nb_letters;
+public class Plateau {
+    static int iteration = 0;
 
-    Plateau(int nb_letters){
-        grille = new Case [nb_letters][5];
-        for (int i=0; i<nb_letters; i++){
-            for (int j=0; j<5; j++){
-                grille[i][j]= Case.VIDE;
-            }
-        }
+    public Plateau(){
+        // Constructeur de la classe Plateau
     }
 
-    public static int setNbLetters(){
+    //Setters
+     public static int setNbLetters(){
         Scanner scan = new Scanner(System.in);
         System.out.println("Entrez le nombre de lettres du mot à deviner : ");
         int nb_letters = scan.nextInt();
+        while (nb_letters < 6 || nb_letters > 9){
+            System.out.println("Le nombre de lettres doit être compris entre 6 et 9 (compris).");
+            System.out.println("Entrez le nombre de lettres du mot à deviner : ");
+            nb_letters = scan.nextInt();
+        }
         return nb_letters;
     }
-
-    public static Plateau creation(int nb_letters){
-        Plateau plateau = new Plateau(nb_letters);
-        return plateau;
-    }
-
-    public static void affichage(int nb_letters, boolean terminal){
-        if (terminal){
-            System.out.println("--".repeat(nb_letters));
-            for (int i=0; i<5; i++){
-                System.out.print("| ");
-                for (int j=0; j<nb_letters; j++){
-                    System.out.print(grille[j][i]+" | ");
-                }
-                System.out.println();
-                System.out.println("--".repeat(nb_letters));
-            }
-        }
-        else{
-            //Affichage sur interface graphique
-            InterfaceMotus affichage = new InterfaceMotus();
-        }
-        
-    }
-
-    public static void main(String[] args) {
-        boolean terminal;
-
+    public static String setType(){
         Scanner scan = new Scanner(System.in);
-        System.out.println("Voulez-vous jouer en mode terminal ou en mode graphique ? (T/G)");
-        String mode = scan.next();
-        if (mode.equals("T"))
-            terminal = true;
-        else
-            terminal = false;
-        
-        //Choix du mode de jeu : PVP ou PVE
-        System.out.println("Voulez-vous jouer en mode solo ou en mode deux joueurs ? (S/M)");
-        String mode_jeu = scan.next();
+        System.out.println("Entrez le type de jeu (JcJ, JcI ou IcI) : ");
+        String type = scan.next();
+        while (type != "JcJ" && type != "JcI" && type != "IcI"){
+            System.out.println("Type de jeu invalide. Veuillez entrer JcJ, JcI ou IcI.");
+            type = setType();
+        }
+        return type;
+    }
 
-        //Choix du mode de jeu : Proposer ou deviner un mot
-        if (mode_jeu.equals("S")){
-            System.out.println("Voulez-vous proposer un mot ou deviner un mot ? (P/D)");
-            String mode_solo = scan.next();
-            if (mode_solo.equals("P")){
-                nb_letters = setNbLetters();
-                creation(nb_letters);
-                Humain player = new Humain();
-                player.definirMot(nb_letters);
+    //Méthodes
+    static void jouer(Joueur joueur1, Joueur joueur2, int nb_letters){
+        String motSecret = joueur1.definirMot(nb_letters);
+        String motPropose = "";
+        while (!motPropose.equals(motSecret) && iteration < 6){
+            motPropose = joueur2.proposerMot(nb_letters, motSecret);
+            verifierMot(motPropose, motSecret, nb_letters);
+            iteration++;
+        }
+        if (motPropose.equals(motSecret)){
+            System.out.println("Bravo, vous avez gagné !");
+        }
+        else if (iteration == 6){
+            System.out.println("Vous avez perdu !");
+            System.out.println("Le mot secret était : " + motSecret);
+        }
+    }
+
+    static void verifierMot(String motPropose, String motSecret, int taille){
+        if (motPropose.charAt(0) != motSecret.charAt(0)){
+            System.out.println("Le mot ne commence pas par la bonne lettre.");
+            resultat("loose");
+        }
+        else if (motPropose.length() != taille){
+            System.out.println("Le mot n'a pas la bonne longueur.");
+            resultat("loose");
+        }
+        else if (motPropose.equals(motSecret)){
+            resultat("win");
+        }
+        else if (!motPropose.equals(motSecret)){
+            for (int i = 0; i < taille; i++){
+                if (motPropose.charAt(i) == motSecret.charAt(i)){
+                    System.out.println("La lettre " + motPropose.charAt(i) + " est à la bonne place.");
+                    //Ajouter interface graphique pour afficher la lettre en carré rouge
+                }
+                else if (motSecret.contains(String.valueOf(motPropose.charAt(i)))){
+                    System.out.println("La lettre " + motPropose.charAt(i) + " est dans le mot mais pas à la bonne place.");
+                    //Ajouter interface graphique pour afficher la lettre en rond jaune
+                }
+                else {
+                    System.out.println("La lettre " + motPropose.charAt(i) + " n'est pas dans le mot.");
+                }
             }
-            else{
-                nb_letters = setNbLetters();
-                creation(nb_letters);
-                Robot IA = new Robot();
-                IA.definirMot(nb_letters);
+            System.out.println("Il vous reste " + (6 - iteration) + " essais.");
+        }
+    }
+
+    static void resultat(String result){
+        if (result == "win"){
+            System.out.println("Bravo, vous avez gagné !");
+        }
+        else if (result == "loose"){
+            System.out.println("Dommage, vous avez perdu !");
+        }
+    }
+
+    //Main
+    public static void main(String[] args) {
+        String type = setType();
+        int nb_letters = setNbLetters();
+        if (type == "JcJ"){
+            Humain joueur1 = new Humain();
+            Humain joueur2 = new Humain();
+            jouer(joueur1, joueur2, nb_letters);
+        }
+        else if (type == "JcI"){
+            Humain joueur1 = new Humain();
+            Robot joueur2 = new Robot();
+            Scanner scan = new Scanner(System.in);
+            String choix = "";
+            while (choix != "O" && choix != "N"){
+                System.out.println("Voulez-vous faire deviner votre mot à la machine ? (O ou N): ");
+                choix = scan.nextLine();
+            }
+            if (choix == "O"){
+                jouer(joueur1, joueur2, nb_letters);
+            }
+            else if (choix == "N"){
+                jouer(joueur2, joueur1, nb_letters);
             }
         }
         else{
-            Humain player1 = new Humain();
-            Humain player2 = new Humain();
-            System.out.println("Joueur 1 : renseignez votre mot à faire deviner à Joueur 2.");
-            nb_letters = setNbLetters();
-            creation(nb_letters);
-            player1.definirMot(nb_letters);
+            Robot joueur1 = new Robot();
+            Robot joueur2 = new Robot();
+            jouer(joueur1, joueur2, nb_letters);
         }
-
-
-
-        
-        affichage(nb_letters, terminal);
-        scan.close();
     }
+
 }

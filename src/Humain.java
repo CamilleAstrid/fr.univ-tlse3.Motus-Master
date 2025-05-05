@@ -1,10 +1,16 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
+public class Humain implements Joueur {
+    String motPropose = "";
+    String motSecret = "";
+    String motSecretLisibleCSV = "";
 
-public class Humain implements Joueur{
-    String motPropose;
-    String motSecret;
-    String motSecretLisibleCSV;
+    public Humain(){
+        this.motPropose = motPropose;
+        this.motSecret = motSecret;
+        this.motSecretLisibleCSV = motSecretLisibleCSV;
+    }
 
     public String motSecretLisibleCSV(String motSecret){
         motSecretLisibleCSV = motSecret.toLowerCase();
@@ -14,42 +20,30 @@ public class Humain implements Joueur{
 
     @Override
     public String definirMot(int nb_letters) {
-   
         Scanner scan = new Scanner(System.in);
         System.out.println("Entrez le mot que vous souhaitez faire deviner: ");
         motSecret = scan.next();
+
         String File = "fr.univ-tlse3.Motus-Master/data/mots_" + nb_letters + "_lettres.csv";
         Load_data mots = new Load_data(File);
         mots.generate();
+
         motSecretLisibleCSV = motSecretLisibleCSV(motSecret);
+
         while (!mots.liste.contains(motSecretLisibleCSV)){
             System.out.println("Le mot n'est pas dans la liste. Il faut choisir un autre mot.");
             System.out.println("Entrez le mot que vous souhaitez faire deviner: ");
             motSecret = scan.next();
+            motSecretLisibleCSV = motSecretLisibleCSV(motSecret);
         }
-        scan.close();
-        return motSecret;
+        return motSecretLisibleCSV;
     }
 
     @Override
-    public String proposerMot(int taille, String motSecret) {
+    public String proposerMot(int taille, String motSecret, int iteration, ArrayList<String> badLetters) {
         Scanner scan = new Scanner(System.in);
         System.out.println("Entrez le mot que vous proposez: ");
         motPropose = scan.next();
-
-        if (motPropose.charAt(0) != motSecret.charAt(0)){
-            System.out.println("Le mot ne commence pas par la bonne lettre.");
-            Results.main("loose");
-        }
-        else if (motPropose.length() != taille){
-            System.out.println("Le mot n'a pas la bonne longueur.");
-            Results.main("loose");
-        }
-        else {
-            Plateau.affichage(taille, false);
-        }
-
-        scan.close();
         return motPropose;
     }
 }
