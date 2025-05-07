@@ -35,15 +35,15 @@ public class Plateau {
 
     //Méthodes
     static void jouer(Joueur joueur1, Joueur joueur2, int nb_letters){
+        int taille = nb_letters + 1;
         String motSecret = joueur1.definirMot(nb_letters);
         String motPropose = "";
-        nb_letters = nb_letters + 1;
         while (!motPropose.equals(motSecret) && iteration < 6){
             motPropose = joueur2.proposerMot(nb_letters, motSecret, iteration, badLetters);
-            verifierMot(motPropose, motSecret, nb_letters);
+            verifierMot(motPropose, motSecret, taille);
             iteration++;
         }
-        if (iteration == 6){
+        if (!motPropose.equals(motSecret) && iteration == 6){
             System.out.println("Vous avez perdu !");
             System.out.println("Le mot secret était : " + motSecret);
         }

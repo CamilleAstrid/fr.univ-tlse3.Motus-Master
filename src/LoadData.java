@@ -36,4 +36,23 @@ public class LoadData {
         this.motSecret = liste.get(index);
     }
 
+    static public String Rules(){
+        String File = "fr.univ-tlse3.Motus-Master/data/Rules.txt";
+        StringBuilder rules = new StringBuilder();
+
+        try{
+            BufferedReader buf = new BufferedReader(new FileReader(File));
+            String read = buf.readLine();
+            while(read != null){
+                rules.append(read);
+                read = buf.readLine();
+            }
+            buf.close();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+        return rules.toString();
+    }
+
 }
