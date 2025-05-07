@@ -12,6 +12,7 @@ public class Rules extends JFrame{
         this.setSize(currentScreenSize);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
+        this.setUndecorated(true);
         this.getContentPane().setBackground(new Color(0x101044));
 
         //Ajout bouton pour retourner au menu

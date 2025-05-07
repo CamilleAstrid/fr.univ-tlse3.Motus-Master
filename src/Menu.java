@@ -21,6 +21,7 @@ public class Menu extends JFrame{
         this.setSize(currentScreenSize);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
+        this.setUndecorated(true);
         this.getContentPane().setBackground(new Color(0x0A0A2A));
 
         JButton JcJ = new JButton("JcJ");
