@@ -25,17 +25,17 @@ public class Humain implements Joueur {
         motSecret = scan.next();
 
         String File = "fr.univ-tlse3.Motus-Master/data/mots_" + nb_letters + "_lettres.csv";
-        Load_data mots = new Load_data(File);
+        LoadData mots = new LoadData(File);
         mots.generate();
 
         motSecretLisibleCSV = motSecretLisibleCSV(motSecret);
 
         while (!mots.liste.contains(motSecretLisibleCSV)){
-            System.out.println("Le mot n'est pas dans la liste. Il faut choisir un autre mot.");
-            System.out.println("Entrez le mot que vous souhaitez faire deviner: ");
+            System.out.println("Ce mot n'est pas référencé. Il faut choisir un autre mot.\nEntrez le mot que vous souhaitez faire deviner: ");
             motSecret = scan.next();
             motSecretLisibleCSV = motSecretLisibleCSV(motSecret);
         }
+        System.out.println("Le mot secret commence par la lettre : " + motSecret.charAt(0));
         return motSecretLisibleCSV;
     }
 
@@ -44,6 +44,7 @@ public class Humain implements Joueur {
         Scanner scan = new Scanner(System.in);
         System.out.println("Entrez le mot que vous proposez: ");
         motPropose = scan.next();
+        motPropose = motSecretLisibleCSV(motPropose);
         return motPropose;
     }
 }

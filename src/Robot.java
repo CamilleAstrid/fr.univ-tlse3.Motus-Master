@@ -20,39 +20,44 @@ public class Robot implements Joueur {
         LoadData mots = new LoadData(File);
         mots.generate();
         motSecret = mots.motSecret;
+        System.out.println("Le mot secret commence par la lettre : " + motSecret.charAt(0));
         return motSecret;
     }
 
     @Override
     public String proposerMot(int taille, String motSecret, int iteration, ArrayList<String> badLetters) {
-        String File = "fr.univ-tlse3.Motus-Master/data/mots_" + taille + "_lettres.csv";
-        LoadData mots = new LoadData(File);
-        mots.generate();
-        
+        //initialisation de la liste
         if (iteration == 0) {
+            String File = "fr.univ-tlse3.Motus-Master/data/mots_" + taille + "_lettres.csv";
+            LoadData mots = new LoadData(File);
+            mots.generate();
+
             for (String mot : mots.liste) {
                 if (mot.charAt(0) == motSecret.charAt(0)) {
-                    liste.add(mot);
+                    this.liste.add(mot);
                 }
                 if (mot.charAt(0) > motSecret.charAt(0)) {
                     break;
                 }
             }
-            motPropose = liste.get(0);
+            this.motPropose = this.liste.get(0);
+
+        // Si le mot proposé n'est pas le bon, on enlève les mots qui contiennent des lettres interdites
         } else {
-            for (String mot : mots.liste) {
-                String motTemp = mot;
+            ArrayList<String> listeTemp = new ArrayList<>(this.liste);
+            for (String motTemp : this.liste) {
                 for (String badLetter : badLetters) {
                     if (motTemp.contains(badLetter)) {
-                        mots.liste.remove(motTemp);
+                        listeTemp.remove(motTemp);
                         break;
                     }
                 }
             }
-            motPropose = liste.get(0);
+            this.liste = listeTemp;
+            this.motPropose = this.liste.get(0);
         }
         
-        return motPropose;
+        return this.motPropose;
     }
 }  
 
