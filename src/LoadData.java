@@ -10,7 +10,8 @@ public class LoadData {
     int nbLigne=0;
     String motSecret="motus";
 
-    LoadData(String File){
+    LoadData(int nb_letters){
+        String File = "../data/mots_" + nb_letters + "_lettres.csv";
         this.File = File;
         this.liste = new ArrayList<String>();
         this.max = nbLigne;
@@ -37,14 +38,14 @@ public class LoadData {
     }
 
     static public String Rules(){
-        String File = "fr.univ-tlse3.Motus-Master/data/Rules.txt";
+        String File = "../data/Rules.txt";
         StringBuilder rules = new StringBuilder();
 
         try{
             BufferedReader buf = new BufferedReader(new FileReader(File));
             String read = buf.readLine();
             while(read != null){
-                rules.append(read);
+                rules.append(read+"\n");
                 read = buf.readLine();
             }
             buf.close();
@@ -55,4 +56,9 @@ public class LoadData {
         return rules.toString();
     }
 
+    public String motSecretLisibleCSV(String motSecret){
+        String motSecretLisibleCSV = motSecret.toLowerCase();
+        motSecretLisibleCSV = motSecretLisibleCSV.concat(",");
+        return motSecretLisibleCSV;
+    }
 }

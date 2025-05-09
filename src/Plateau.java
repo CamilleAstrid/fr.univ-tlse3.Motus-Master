@@ -2,12 +2,43 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Plateau {
+
+    /////////////////////////////////////////////////// TERMINAL ///////////////////////////////////////////////////
     static int iteration = 0;
     static ArrayList<String> badLetters = new ArrayList<>();
 
     public Plateau(){
         // Constructeur de la classe Plateau
-    }
+        String type = setType();
+        int nb_letters = setNbLetters();
+
+        if (type.equals("JcJ")){
+            Humain joueur1 = new Humain();
+            Humain joueur2 = new Humain();
+            jouer(joueur1, joueur2, nb_letters);
+        }
+        else if (type.equals("JcI")){
+            Scanner scanOrdre = new Scanner(System.in);
+            String choix = "";
+            while (!(choix.equals("O") || choix.equals("N"))){
+                System.out.println("Voulez-vous faire deviner votre mot à la machine ? (O ou N): ");
+                choix = scanOrdre.nextLine();
+            }
+            Humain joueur1 = new Humain();
+            Robot joueur2 = new Robot();
+            if (choix.equals("O")){
+                jouer(joueur1, joueur2, nb_letters);
+            }
+            else if (choix.equals("N")){
+                jouer(joueur2, joueur1, nb_letters);
+            }
+        }
+        else{
+            Robot joueur1 = new Robot();
+            Robot joueur2 = new Robot();
+            jouer(joueur1, joueur2, nb_letters);
+        }
+    }    
 
     //Setters
     public static int setNbLetters(){
@@ -48,7 +79,6 @@ public class Plateau {
             System.out.println("Le mot secret était : " + motSecret);
         }
     }
-
     static void verifierMot(String motPropose, String motSecret, int taille){
         if (motPropose.charAt(0) != motSecret.charAt(0)){
             System.out.println("Le mot ne commence pas par la bonne lettre.");
@@ -79,7 +109,6 @@ public class Plateau {
             System.out.println("Il vous reste " + (6 - (iteration + 1)) + " essais.");
         }
     }
-
     static void resultat(String result, String motSecret){
         if (result.equals("win")){
             System.out.println("Bravo, vous avez gagné !");
@@ -90,40 +119,11 @@ public class Plateau {
         }
     }
 
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  
+
     //Main
     public static void main(String[] args) {
-        String type = setType();
-        int nb_letters;
-
-        if (type.equals("JcJ")){
-            nb_letters = setNbLetters();
-            Humain joueur1 = new Humain();
-            Humain joueur2 = new Humain();
-            jouer(joueur1, joueur2, nb_letters);
-        }
-        else if (type.equals("JcI")){
-            Scanner scanOrdre = new Scanner(System.in);
-            String choix = "";
-            while (!(choix.equals("O") || choix.equals("N"))){
-                System.out.println("Voulez-vous faire deviner votre mot à la machine ? (O ou N): ");
-                choix = scanOrdre.nextLine();
-            }
-            nb_letters = setNbLetters();
-            Humain joueur1 = new Humain();
-            Robot joueur2 = new Robot();
-            if (choix.equals("O")){
-                jouer(joueur1, joueur2, nb_letters);
-            }
-            else if (choix.equals("N")){
-                jouer(joueur2, joueur1, nb_letters);
-            }
-        }
-        else{
-            nb_letters = setNbLetters();
-            Robot joueur1 = new Robot();
-            Robot joueur2 = new Robot();
-            jouer(joueur1, joueur2, nb_letters);
-        }
+        Plateau plateau = new Plateau();
     }
-
 }

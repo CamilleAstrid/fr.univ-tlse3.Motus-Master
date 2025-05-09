@@ -1,11 +1,9 @@
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -13,16 +11,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.Color;
 
-public class Menu extends JFrame{
+public class Menu extends Initialize{
     
     public Menu(){
         this.setTitle("Menu");
-        Dimension currentScreenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        this.setSize(currentScreenSize);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setResizable(false);
-        this.setUndecorated(true);
-        this.getContentPane().setBackground(new Color(0x0A0A2A));
 
         JButton JcJ = new JButton("JcJ");
         JButton JcI = new JButton("JcI");
@@ -38,9 +30,8 @@ public class Menu extends JFrame{
         FlowLayout buttonLayout = new FlowLayout(FlowLayout.CENTER,15,15);
         JPanel buttonPanel = new JPanel(buttonLayout);
         buttonPanel.setBackground(new Color(0x0A0A2A));
-        JPanel backgroundPanel = new JPanel();
-        
-        Image image = Toolkit.getDefaultToolkit().getImage("fr.univ-tlse3.Motus-Master/data/motus.png");
+     
+        Image image = Toolkit.getDefaultToolkit().getImage("../data/motus.png");
         ImageIcon icon = new ImageIcon(image);
         JLabel backgroundLabel = new JLabel(icon);
 
@@ -51,29 +42,33 @@ public class Menu extends JFrame{
         this.add(buttonStartPanel, BorderLayout.PAGE_START);
         this.add(buttonPanel, BorderLayout.PAGE_END);
 
+        
         //Listeners
         JcJ.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent clic) {
-                
+                new SelectionNumber("JcJ");
+                dispose();
             }
         });
         JcI.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent clic) {
-                
+                new SelectionType();
+                dispose();
             }
         });
         IcI.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent clic) {
-                
+                new SelectionNumber("IcI");
+                dispose();
             }
         });
         Regles.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent clic) {
-                new Rules();
+                new Rules("Menu");
                 dispose();
             }
         });
