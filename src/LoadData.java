@@ -37,8 +37,7 @@ public class LoadData {
         this.motSecret = liste.get(index);
     }
 
-    static public String Rules(){
-        String File = "../data/Rules.txt";
+    static public String Text(String File){
         StringBuilder rules = new StringBuilder();
 
         try{

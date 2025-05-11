@@ -9,7 +9,8 @@ public class Rules extends Initialize{
         this.setTitle("Rules");
         
         //Ajout du texte explicatif
-        String text = LoadData.Rules();
+        String File = "../data/Rules.txt";
+        String text = LoadData.Text(File);
 
         //Ajout bouton pour retourner au menu
         JButton retour = new JButton("Retour");
