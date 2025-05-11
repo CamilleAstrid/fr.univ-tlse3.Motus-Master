@@ -23,15 +23,9 @@ public class SelectionNumber extends JOptionPane{
         if (selection != null) {  // Vérifie si l'utilisateur n'a pas cliqué sur "Annuler"
             String selectedOption = String.valueOf(selection);
             nb_letters = Integer.parseInt(selectedOption);
-            if (type.equals("O") || type.equals("JcJ") || type.equals("IcI"))
-                new SelectionMot(type, nb_letters);
-            else{
-                LoadData mots = new LoadData(nb_letters);
-                mots.generate();
-                String motSecret = mots.motSecret;
-                char firstLetter = motSecret.charAt(0);
-                new Game(type, nb_letters, motSecret, firstLetter);
-            }
+            new SelectionMot(type, nb_letters);
         }
+        else
+            new Menu();
     }
 }

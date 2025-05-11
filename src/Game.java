@@ -2,12 +2,21 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Game extends Initialize {
-    static int essai = 6;
-    static int tentative = 0;
+    static int essai;
+    static int tentative;
+    static ArrayList<String> badLetters;
+    static HashMap<String, String> goodPlace;
 
     public Game(String type, int nb_letters, String motSecret, char firstLetter) {
+        essai = 6;
+        tentative = 0;
+        badLetters = new ArrayList<>();
+        goodPlace = new HashMap<>();
+
+        Robot IA = new Robot();
 
         // Initialisation de la fenêtre
         this.setTitle("Motus-Master");
@@ -43,6 +52,7 @@ public class Game extends Initialize {
                 letter = " ";
             }
             CaseLabel textArea = new CaseLabel(letter);
+            textArea.setEtat("none");
             textArea.setPreferredSize(new Dimension(50, 50));  // Taille des cases
             textArea.setBackground(Color.white); // Couleur de fond des cases
             textArea.setFont(new Font("Arial", Font.PLAIN, 20)); // Format de police des cases
@@ -58,14 +68,22 @@ public class Game extends Initialize {
         JPanel proposePanel = new JPanel(proposePanelLayout);
         proposePanel.setBackground(new Color(0x0A0A2A));
 
-        JTextField textField = new JTextField("Proposer un mot de " + nb_letters + " lettres");
+        String affichage = motSecret.replace(",", "");
+        JTextField textField = new JTextField(affichage);
         textField.setBackground(Color.white);
         textField.setFont(new Font("Arial", Font.PLAIN, 20));
-        textField.setEditable(true);
+        textField.setEditable(false);
         textField.setForeground(Color.black);
+        if (type.equals("N") || type.equals("JcJ")){
+            textField.setEditable(true);
+            textField.setText("Proposer un mot de " + nb_letters + " lettres");
+        }
         proposePanel.add(textField);
 
-        JButton validateButton = new JButton("Valider");
+        JButton validateButton = new JButton("Suivant");
+        if (type.equals("N") || type.equals("JcJ")){
+            validateButton.setText("Valider");
+        }
         validateButton.setBackground(new Color(255, 100, 0));
         validateButton.setForeground(Color.black);
         validateButton.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -89,7 +107,9 @@ public class Game extends Initialize {
 
 
         JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, topPanel, bottomPanel);
-        splitPane.setDividerLocation((int)(getCurrentScreenSize().getHeight()*0.9)); 
+        splitPane.setDividerLocation((int)(getCurrentScreenSize().getHeight()*0.9));
+        splitPane.setDividerSize(0); // Supprime la taille visible du séparateur
+        splitPane.setEnabled(false); // Désactive le redimensionnement
 
         getContentPane().add(splitPane);
 
@@ -118,7 +138,14 @@ public class Game extends Initialize {
         textField.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent evt) {
-                textField.setText(null);
+                if (type.equals("N")|| type.equals("JcJ"))
+                    textField.setText(null);
+            }
+        });
+        textField.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent entree){
+                validateButton.doClick();
             }
         });
         
@@ -126,8 +153,17 @@ public class Game extends Initialize {
         validateButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent clic) {
-                String motPropose = textField.getText();
-                ArrayList<String> check = verifierMot(motSecret, motPropose, nb_letters);
+                String motPropose = "";
+                if (type.equals("N") || type.equals("JcJ")){
+                    motPropose = textField.getText();
+                }
+                else{
+                    motPropose = IA.proposerMot(nb_letters, motSecret, tentative, badLetters, goodPlace);
+                    String sub = motPropose.substring(0, nb_letters);
+                    motPropose = sub;
+                }
+                    
+                ArrayList<String> check = verifierMot(motSecret, motPropose, nb_letters, type);
 
                 if (check.isEmpty())
                     textField.setText("Proposer un mot de " + nb_letters + " lettres");
@@ -140,6 +176,7 @@ public class Game extends Initialize {
                             case "good":
                                 currentCase.setText(String.valueOf(motPropose.charAt(position)));
                                 currentCase.setEtat("good");
+                                goodPlace.put(String.valueOf(position),currentCase.getText());
                                 break;
                             case "nearly":
                                 currentCase.setText(String.valueOf(motPropose.charAt(position)));
@@ -148,12 +185,13 @@ public class Game extends Initialize {
                             case "nope":
                                 currentCase.setText(String.valueOf(motPropose.charAt(position)));
                                 currentCase.setEtat("nope");
+                                badLetters.add(currentCase.getText());
                                 break;
                         }
                     }
                 }
                 else{
-                    new ResultsEndGame("loose");
+                    new ResultsEndGame("loose", type);
                 }
             }
         });
@@ -161,7 +199,7 @@ public class Game extends Initialize {
         this.setVisible(true);
     }
 
-    public ArrayList<String> verifierMot(String motSecret, String motPropose, int nb_letters){
+    public ArrayList<String> verifierMot(String motSecret, String motPropose, int nb_letters, String type){
         ArrayList<String> res = new ArrayList<>();
         char firstLetter = motSecret.charAt(0);
         LoadData mots = new LoadData(nb_letters);
@@ -184,7 +222,7 @@ public class Game extends Initialize {
             return res;
         }
         else if (motPropose.equals(motSecret)){
-            new ResultsEndGame("win");
+            new ResultsEndGame("win", type);
             dispose();
             return res;
         }
@@ -192,11 +230,9 @@ public class Game extends Initialize {
             for (int i = 0; i < taille; i++){
                 if (motPropose.charAt(i) == motSecret.charAt(i)){
                     res.add("good");
-                    //Ajouter interface graphique pour afficher la lettre en carré rouge
                 }
                 else if (motSecret.contains(String.valueOf(motPropose.charAt(i)))){
                     res.add("nearly");
-                    //Ajouter interface graphique pour afficher la lettre en rond jaune
                 }
                 else {
                     res.add("nope");
@@ -204,5 +240,9 @@ public class Game extends Initialize {
             }
             return res;
         }
+    }
+
+    public static void main(String[] args) {
+        new Game("IcI", 6, "police", "p".charAt(0));
     }
 }

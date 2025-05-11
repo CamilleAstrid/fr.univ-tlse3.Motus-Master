@@ -24,6 +24,7 @@ public class Menu extends Initialize{
 
         BorderLayout mainLayout = new BorderLayout();
         this.setLayout(mainLayout);
+        
         FlowLayout buttonStartLayout = new FlowLayout(FlowLayout.CENTER,15,15);
         JPanel buttonStartPanel= new JPanel(buttonStartLayout);
         buttonStartPanel.setBackground(new Color(0x0A0A2A));

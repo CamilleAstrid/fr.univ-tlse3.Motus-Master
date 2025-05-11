@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Robot implements Joueur {
     String motPropose;
@@ -24,7 +25,7 @@ public class Robot implements Joueur {
     }
 
     @Override
-    public String proposerMot(int taille, String motSecret, int iteration, ArrayList<String> badLetters) {
+    public String proposerMot(int taille, String motSecret, int iteration, ArrayList<String> badLetters, HashMap<String,String> goodPlace) {
         //initialisation de la liste
         if (iteration == 0) {
             LoadData mots = new LoadData(taille);
@@ -34,7 +35,7 @@ public class Robot implements Joueur {
                 if (mot.charAt(0) == motSecret.charAt(0)) {
                     this.liste.add(mot);
                 }
-                if (mot.charAt(0) > motSecret.charAt(0)) {
+                else if (mot.charAt(0) > motSecret.charAt(0)) {
                     break;
                 }
             }
@@ -48,6 +49,16 @@ public class Robot implements Joueur {
                     if (motTemp.contains(badLetter)) {
                         listeTemp.remove(motTemp);
                         break;
+                    }
+                }
+                if (!goodPlace.isEmpty()){
+                    for (int i=0; i<taille; i++){
+                        String index = String.valueOf(i);
+                        if (goodPlace.containsKey(index)){
+                            if (String.valueOf(motTemp.charAt(i))!=goodPlace.get(index))
+                            listeTemp.remove(motTemp);
+                            break;
+                        };
                     }
                 }
             }

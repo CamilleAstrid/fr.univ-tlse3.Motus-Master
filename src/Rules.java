@@ -28,7 +28,9 @@ public class Rules extends Initialize{
         rightPanel.setBackground(new Color(0x101044));
         rightPanel.add(retour, BorderLayout.NORTH);
         JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, scrollPane, rightPanel);
-        splitPane.setDividerLocation((int)(getCurrentScreenSize().getWidth()*0.9)); 
+        splitPane.setDividerLocation((int)(getCurrentScreenSize().getWidth()*0.9));
+        scrollPane.setBorder(null);
+        scrollPane.getVerticalScrollBar().setPreferredSize(new Dimension(0, 0));
 
         getContentPane().add(splitPane);        
 

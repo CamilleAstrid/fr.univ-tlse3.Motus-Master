@@ -19,11 +19,13 @@ public class SelectionType extends JOptionPane{
         if (selection.equals(JOptionPane.YES_OPTION)) {
             // Si l'utilisateur a cliqué sur "Oui"
                 type = "O";
-            }
-            else if (selection.equals(JOptionPane.NO_OPTION)){
+        }
+        else if (selection.equals(JOptionPane.NO_OPTION)){
             // Si l'utilisateur a cliqué sur "Non"
                 type = "N";
-            }
-            new SelectionNumber(type);
         }
+        else
+            new Menu();
+        new SelectionNumber(type);
+    }
 }

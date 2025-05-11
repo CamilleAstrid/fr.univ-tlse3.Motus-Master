@@ -1,11 +1,11 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Plateau {
-
-    /////////////////////////////////////////////////// TERMINAL ///////////////////////////////////////////////////
     static int iteration = 0;
     static ArrayList<String> badLetters = new ArrayList<>();
+    static HashMap<String,String> goodPlace = new HashMap<>();
 
     public Plateau(){
         // Constructeur de la classe Plateau
@@ -70,7 +70,7 @@ public class Plateau {
         String motSecret = joueur1.definirMot(nb_letters);
         String motPropose = "";
         while (!motPropose.equals(motSecret) && iteration < 6){
-            motPropose = joueur2.proposerMot(nb_letters, motSecret, iteration, badLetters);
+            motPropose = joueur2.proposerMot(nb_letters, motSecret, iteration, badLetters, goodPlace);
             verifierMot(motPropose, motSecret, taille);
             iteration++;
         }
@@ -95,11 +95,9 @@ public class Plateau {
             for (int i = 0; i < taille; i++){
                 if (motPropose.charAt(i) == motSecret.charAt(i)){
                     System.out.println("La lettre " + motPropose.charAt(i) + " est à la bonne place.");
-                    //Ajouter interface graphique pour afficher la lettre en carré rouge
                 }
                 else if (motSecret.contains(String.valueOf(motPropose.charAt(i)))){
                     System.out.println("La lettre " + motPropose.charAt(i) + " est dans le mot mais pas à la bonne place.");
-                    //Ajouter interface graphique pour afficher la lettre en rond jaune
                 }
                 else {
                     System.out.println("La lettre " + motPropose.charAt(i) + " n'est pas dans le mot.");
@@ -117,10 +115,7 @@ public class Plateau {
             System.out.println("Dommage, vous avez perdu !");
             System.out.println("Le mot secret était : " + motSecret);
         }
-    }
-
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  
+    }  
 
     //Main
     public static void main(String[] args) {
