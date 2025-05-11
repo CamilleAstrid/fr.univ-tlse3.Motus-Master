@@ -34,7 +34,7 @@ public class Humain implements Joueur {
     }
 
     @Override
-    public String proposerMot(int taille, String motSecret, int iteration, ArrayList<String> badLetters, HashMap<String,String> goodPlace) {
+    public String proposerMot(int taille, String motSecret, int iteration, ArrayList<String> badLetters, HashMap<String,String> goodPlace, HashMap<String,String> niceTry) {
         Scanner scan = new Scanner(System.in);
         System.out.println("Entrez le mot que vous proposez: ");
         motPropose = scan.next();

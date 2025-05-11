@@ -24,13 +24,15 @@ public class Rules extends Initialize{
         textArea.setFont(new Font("Arial", Font.PLAIN, 20));
         textArea.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(textArea, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane.setBorder(null);
+        scrollPane.getVerticalScrollBar().setPreferredSize(new Dimension(0, 0));
         JPanel rightPanel = new JPanel(new BorderLayout());
         rightPanel.setBackground(new Color(0x101044));
         rightPanel.add(retour, BorderLayout.NORTH);
         JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, scrollPane, rightPanel);
         splitPane.setDividerLocation((int)(getCurrentScreenSize().getWidth()*0.9));
-        scrollPane.setBorder(null);
-        scrollPane.getVerticalScrollBar().setPreferredSize(new Dimension(0, 0));
+        splitPane.setDividerSize(0); // Supprime la taille visible du séparateur
+        splitPane.setEnabled(false); // Désactive le redimensionnement
 
         getContentPane().add(splitPane);        
 
@@ -43,7 +45,7 @@ public class Rules extends Initialize{
                 }
             });
         }
-        else if (from.equals("Game")){
+        else {
             retour.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent clic) {

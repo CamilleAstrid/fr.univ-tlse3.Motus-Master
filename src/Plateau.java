@@ -6,6 +6,7 @@ public class Plateau {
     static int iteration = 0;
     static ArrayList<String> badLetters = new ArrayList<>();
     static HashMap<String,String> goodPlace = new HashMap<>();
+    static HashMap<String,String> niceTry = new HashMap<>();
 
     public Plateau(){
         // Constructeur de la classe Plateau
@@ -70,7 +71,7 @@ public class Plateau {
         String motSecret = joueur1.definirMot(nb_letters);
         String motPropose = "";
         while (!motPropose.equals(motSecret) && iteration < 6){
-            motPropose = joueur2.proposerMot(nb_letters, motSecret, iteration, badLetters, goodPlace);
+            motPropose = joueur2.proposerMot(nb_letters, motSecret, iteration, badLetters, goodPlace, niceTry);
             verifierMot(motPropose, motSecret, taille);
             iteration++;
         }
@@ -95,9 +96,11 @@ public class Plateau {
             for (int i = 0; i < taille; i++){
                 if (motPropose.charAt(i) == motSecret.charAt(i)){
                     System.out.println("La lettre " + motPropose.charAt(i) + " est à la bonne place.");
+                    goodPlace.put(String.valueOf(i), String.valueOf(motPropose.charAt(i)));
                 }
                 else if (motSecret.contains(String.valueOf(motPropose.charAt(i)))){
                     System.out.println("La lettre " + motPropose.charAt(i) + " est dans le mot mais pas à la bonne place.");
+                    niceTry.put(String.valueOf(i), String.valueOf(motPropose.charAt(i)));
                 }
                 else {
                     System.out.println("La lettre " + motPropose.charAt(i) + " n'est pas dans le mot.");

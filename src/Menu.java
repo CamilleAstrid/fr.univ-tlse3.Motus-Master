@@ -27,10 +27,10 @@ public class Menu extends Initialize{
         
         FlowLayout buttonStartLayout = new FlowLayout(FlowLayout.CENTER,15,15);
         JPanel buttonStartPanel= new JPanel(buttonStartLayout);
-        buttonStartPanel.setBackground(new Color(0x0A0A2A));
+        buttonStartPanel.setBackground(new Color(0x101044));
         FlowLayout buttonLayout = new FlowLayout(FlowLayout.CENTER,15,15);
         JPanel buttonPanel = new JPanel(buttonLayout);
-        buttonPanel.setBackground(new Color(0x0A0A2A));
+        buttonPanel.setBackground(new Color(0x101044));
      
         Image image = Toolkit.getDefaultToolkit().getImage("../data/motus.png");
         ImageIcon icon = new ImageIcon(image);

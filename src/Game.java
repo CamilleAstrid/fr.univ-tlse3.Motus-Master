@@ -9,24 +9,23 @@ public class Game extends Initialize {
     static int tentative;
     static ArrayList<String> badLetters;
     static HashMap<String, String> goodPlace;
+    static HashMap<String,String> niceTry;
 
     public Game(String type, int nb_letters, String motSecret, char firstLetter) {
-        essai = 6;
-        tentative = 0;
-        badLetters = new ArrayList<>();
-        goodPlace = new HashMap<>();
-
+        // Initialisation des paramètres
+        essai = 6; tentative = 0;
+        badLetters = new ArrayList<>(); goodPlace = new HashMap<>(); niceTry = new HashMap<>();
         Robot IA = new Robot();
 
         // Initialisation de la fenêtre
         this.setTitle("Motus-Master");
-        this.setBackground(new Color(20, 20, 60)); // fond bleu foncé clair
-        this.setForeground(Color.WHITE); 
+        this.setBackground(new Color(0x101044));
+        this.setForeground(Color.WHITE);
         
         // Création haut de la fenêtre
         GridLayout topPanelLayout = new GridLayout(3,1,20,20);
         JPanel topPanel = new JPanel(topPanelLayout);
-        topPanel.setBackground(new Color(0x0A0A2A));
+        topPanel.setBackground(new Color(0x101044));
         topPanel.setBorder(null);
 
 
@@ -35,12 +34,13 @@ public class Game extends Initialize {
         Image scaledImage = image.getScaledInstance(200, 200, image.SCALE_SMOOTH);
         ImageIcon icon = new ImageIcon(scaledImage);
         JLabel backgroundLabel = new JLabel(icon);
+        backgroundLabel.setBounds(0, 0, getWidth(), getHeight());
         topPanel.add(backgroundLabel, CENTER_ALIGNMENT);
 
         // Ajout de la grille de jeu
         JPanel panelWithGrid = new JPanel(new FlowLayout(FlowLayout.CENTER));
         JPanel gridPanel = new JPanel(new GridLayout(6, nb_letters));
-        panelWithGrid.setBackground(new Color(0x0A0A2A));
+        panelWithGrid.setBackground(new Color(0x101044));
         ArrayList<CaseLabel> cases = new ArrayList<>();
 
         for (int i = 0; i < essai * nb_letters; i++) {
@@ -66,7 +66,7 @@ public class Game extends Initialize {
         // Ajout de la zone de texte et du bouton "valider"
         FlowLayout proposePanelLayout = new FlowLayout(FlowLayout.CENTER);
         JPanel proposePanel = new JPanel(proposePanelLayout);
-        proposePanel.setBackground(new Color(0x0A0A2A));
+        proposePanel.setBackground(new Color(0x101044));
 
         String affichage = motSecret.replace(",", "");
         JTextField textField = new JTextField(affichage);
@@ -96,7 +96,7 @@ public class Game extends Initialize {
         // Création bas de la fenêtre
         FlowLayout bottomPanelLayout = new FlowLayout(FlowLayout.CENTER);
         JPanel bottomPanel = new JPanel(bottomPanelLayout);
-        bottomPanel.setBackground(new Color(0x0A0A2A));
+        bottomPanel.setBackground(new Color(0x101044));
 
         JButton rulesButton = new JButton("Règles du jeu");
         JButton menuButton = new JButton("Menu principal");
@@ -158,7 +158,7 @@ public class Game extends Initialize {
                     motPropose = textField.getText();
                 }
                 else{
-                    motPropose = IA.proposerMot(nb_letters, motSecret, tentative, badLetters, goodPlace);
+                    motPropose = IA.proposerMot(nb_letters, motSecret, tentative, badLetters, goodPlace, niceTry);
                     String sub = motPropose.substring(0, nb_letters);
                     motPropose = sub;
                 }
@@ -181,6 +181,7 @@ public class Game extends Initialize {
                             case "nearly":
                                 currentCase.setText(String.valueOf(motPropose.charAt(position)));
                                 currentCase.setEtat("nearly");
+                                niceTry.put(String.valueOf(position),currentCase.getText());
                                 break;
                             case "nope":
                                 currentCase.setText(String.valueOf(motPropose.charAt(position)));

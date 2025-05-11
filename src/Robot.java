@@ -25,7 +25,7 @@ public class Robot implements Joueur {
     }
 
     @Override
-    public String proposerMot(int taille, String motSecret, int iteration, ArrayList<String> badLetters, HashMap<String,String> goodPlace) {
+    public String proposerMot(int taille, String motSecret, int iteration, ArrayList<String> badLetters, HashMap<String,String> goodPlace, HashMap<String,String> niceTry) {
         //initialisation de la liste
         if (iteration == 0) {
             LoadData mots = new LoadData(taille);
@@ -41,7 +41,7 @@ public class Robot implements Joueur {
             }
             this.motPropose = this.liste.get(0);
 
-        // Si le mot proposé n'est pas le bon, on enlève les mots qui contiennent des lettres interdites
+        // Si le mot proposé n'est pas le bon, on enlève les mots qui contiennent les lettres au mauvais endroit et interdites
         } else {
             ArrayList<String> listeTemp = new ArrayList<>(this.liste);
             for (String motTemp : this.liste) {
@@ -51,13 +51,25 @@ public class Robot implements Joueur {
                         break;
                     }
                 }
-                if (!goodPlace.isEmpty()){
+                if (goodPlace.isEmpty()==false){
                     for (int i=0; i<taille; i++){
                         String index = String.valueOf(i);
                         if (goodPlace.containsKey(index)){
-                            if (String.valueOf(motTemp.charAt(i))!=goodPlace.get(index))
-                            listeTemp.remove(motTemp);
-                            break;
+                            if (!String.valueOf(motTemp.charAt(i)).equals(goodPlace.get(index))){
+                                listeTemp.remove(motTemp);
+                                break;
+                            }
+                        };
+                    }
+                }
+                if (niceTry.isEmpty()==false){
+                    for (int i=0; i<taille; i++){
+                        String index = String.valueOf(i);
+                        if (niceTry.containsKey(index)){
+                            if (String.valueOf(motTemp.charAt(i)).equals(niceTry.get(index))){
+                                listeTemp.remove(motTemp);
+                                break;
+                            }
                         };
                     }
                 }
@@ -65,8 +77,6 @@ public class Robot implements Joueur {
             this.liste = listeTemp;
             this.motPropose = this.liste.get(0);
         }
-        
         return this.motPropose;
     }
-}  
-
+}

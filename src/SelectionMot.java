@@ -17,8 +17,12 @@ public class SelectionMot extends JOptionPane{
             setVisible(true);
 
             // Ajout du listener quand on clique sur OK dans la boite de dialogue
-            if (selection==null)
+            if (selection==null){
                 new Menu();
+                return; //  Permet de gerer une erreur
+                // Exception in thread "AWT-EventQueue-0" java.lang.StringIndexOutOfBoundsException: Index 0 out of bounds for length 0
+                // Erreur provoquée par les dernières lignes du constructeur dans le cas ou l'on fait "annuler".
+            }
             else if (selection.length() != nb_letters) {
                 JOptionPane.showMessageDialog(
                     this,

@@ -35,7 +35,7 @@ public class ResultsEndGame extends Initialize{
         
         FlowLayout buttonLayout = new FlowLayout(FlowLayout.CENTER,15,15);
         JPanel buttonPanel = new JPanel(buttonLayout);
-        buttonPanel.setBackground(new Color(0x0A0A2A));
+        buttonPanel.setBackground(new Color(0x101044));
 
         Image image = Toolkit.getDefaultToolkit().getImage(filename);
         ImageIcon icon = new ImageIcon(image);
@@ -64,8 +64,7 @@ public class ResultsEndGame extends Initialize{
         Regles.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent clic) {
-                new Rules("Menu");
-                dispose();
+                new Rules("Result");
             }
         });
         Quitter.addActionListener(new ActionListener() {
