@@ -172,21 +172,22 @@ public class Game extends Initialize {
                     for (int position = 0; position<nb_letters; position++ ){
                         int index = (tentative - 1) * nb_letters + position; // tentative-1 car tentative déjà incrémentée
                         CaseLabel currentCase = cases.get(index);
+                        String letterUp = String.valueOf(motPropose.charAt(position)).toUpperCase();
+                        String letterDown = String.valueOf(motPropose.charAt(position)).toLowerCase();
+                        String positionString = String.valueOf(position);
+                        currentCase.setText(letterUp);
                         switch (check.get(position)) {
                             case "good":
-                                currentCase.setText(String.valueOf(motPropose.charAt(position)));
                                 currentCase.setEtat("good");
-                                goodPlace.put(String.valueOf(position),currentCase.getText());
+                                goodPlace.put(positionString,letterDown);
                                 break;
                             case "nearly":
-                                currentCase.setText(String.valueOf(motPropose.charAt(position)));
                                 currentCase.setEtat("nearly");
-                                niceTry.put(String.valueOf(position),currentCase.getText());
+                                niceTry.put(positionString,letterDown);
                                 break;
                             case "nope":
-                                currentCase.setText(String.valueOf(motPropose.charAt(position)));
                                 currentCase.setEtat("nope");
-                                badLetters.add(currentCase.getText());
+                                badLetters.add(letterDown);
                                 break;
                         }
                     }
