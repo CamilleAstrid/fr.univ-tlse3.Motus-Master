@@ -1,20 +1,13 @@
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.awt.Image;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.Color;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 
 public class Menu extends Initialize{
     
     public Menu(){
         this.setTitle("Menu");
+        BorderLayout mainLayout = new BorderLayout();
+        this.setLayout(mainLayout);
 
         JButton JcJ = new JButton("JcJ");
         JButton JcI = new JButton("JcI");
@@ -22,27 +15,21 @@ public class Menu extends Initialize{
         JButton Regles = new JButton("Règles");
         JButton Quitter = new JButton("Quitter");
 
-        BorderLayout mainLayout = new BorderLayout();
-        this.setLayout(mainLayout);
-        
-        FlowLayout buttonStartLayout = new FlowLayout(FlowLayout.CENTER,15,15);
-        JPanel buttonStartPanel= new JPanel(buttonStartLayout);
-        buttonStartPanel.setBackground(new Color(0x101044));
         FlowLayout buttonLayout = new FlowLayout(FlowLayout.CENTER,15,15);
+        JPanel buttonStartPanel= new JPanel(buttonLayout);
         JPanel buttonPanel = new JPanel(buttonLayout);
-        buttonPanel.setBackground(new Color(0x101044));
+        buttonStartPanel.setBackground(motusColor);
+        buttonPanel.setBackground(motusColor);
      
         Image image = Toolkit.getDefaultToolkit().getImage("../data/motus.png");
         ImageIcon icon = new ImageIcon(image);
         JLabel backgroundLabel = new JLabel(icon);
-
 
         buttonStartPanel.add(JcJ); buttonStartPanel.add(JcI); buttonStartPanel.add(IcI);
         buttonPanel.add(Regles); buttonPanel.add(Quitter);
         this.add(backgroundLabel, BorderLayout.CENTER);
         this.add(buttonStartPanel, BorderLayout.PAGE_START);
         this.add(buttonPanel, BorderLayout.PAGE_END);
-
         
         //Listeners
         JcJ.addActionListener(new ActionListener() {

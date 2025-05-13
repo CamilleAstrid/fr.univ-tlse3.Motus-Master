@@ -9,7 +9,6 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.Color;
 
 public class ResultsEndGame extends Initialize{
     
@@ -35,7 +34,7 @@ public class ResultsEndGame extends Initialize{
         
         FlowLayout buttonLayout = new FlowLayout(FlowLayout.CENTER,15,15);
         JPanel buttonPanel = new JPanel(buttonLayout);
-        buttonPanel.setBackground(new Color(0x101044));
+        buttonPanel.setBackground(motusColor);
 
         Image image = Toolkit.getDefaultToolkit().getImage(filename);
         ImageIcon icon = new ImageIcon(image);

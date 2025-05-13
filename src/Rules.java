@@ -19,7 +19,7 @@ public class Rules extends Initialize{
         textArea.setLineWrap(true); // Permet de faire un retour à la ligne automatique
         textArea.setWrapStyleWord(true); // Permet de ne pas couper les mots
         textArea.setMargin(new Insets(20,20,20,200)); // Ajout d'une marge autour du texte
-        textArea.setBackground(new Color(0x101044));
+        textArea.setBackground(motusColor);
         textArea.setForeground(Color.white);
         textArea.setFont(new Font("Arial", Font.PLAIN, 20));
         textArea.setEditable(false);
@@ -27,7 +27,7 @@ public class Rules extends Initialize{
         scrollPane.setBorder(null);
         scrollPane.getVerticalScrollBar().setPreferredSize(new Dimension(0, 0));
         JPanel rightPanel = new JPanel(new BorderLayout());
-        rightPanel.setBackground(new Color(0x101044));
+        rightPanel.setBackground(motusColor);
         rightPanel.add(retour, BorderLayout.NORTH);
         JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, scrollPane, rightPanel);
         splitPane.setDividerLocation((int)(getCurrentScreenSize().getWidth()*0.9));

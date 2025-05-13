@@ -4,14 +4,14 @@ import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Game extends Initialize {
+public class GameEasy extends Initialize {
     static int essai;
     static int tentative;
     static ArrayList<String> badLetters;
     static HashMap<String, String> goodPlace;
     static HashMap<String,String> niceTry;
 
-    public Game(String type, int nb_letters, String motSecret, char firstLetter) {
+    public GameEasy(String type, int nb_letters, String motSecret, char firstLetter) {
         // Initialisation des paramètres
         essai = 6; tentative = 0;
         badLetters = new ArrayList<>(); goodPlace = new HashMap<>(); niceTry = new HashMap<>();
