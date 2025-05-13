@@ -4,14 +4,14 @@ import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Game extends Initialize {
+public class GameEasy extends Initialize {
     static int essai;
     static int tentative;
     static ArrayList<String> badLetters;
     static HashMap<String, String> goodPlace;
     static HashMap<String,String> niceTry;
 
-    public Game(String type, int nb_letters, String motSecret, char firstLetter) {
+    public GameEasy(String type, int nb_letters, String motSecret, char firstLetter) {
         // Initialisation des paramètres
         essai = 6; tentative = 0;
         badLetters = new ArrayList<>(); goodPlace = new HashMap<>(); niceTry = new HashMap<>();
@@ -166,7 +166,7 @@ public class Game extends Initialize {
 
                 if (check.isEmpty())
                     textField.setText("Proposer un mot de " + nb_letters + " lettres");
-                else if (tentative!=essai-1){
+                else if (tentative!=essai){
                     tentative++;
                     for (int position = 0; position<nb_letters; position++ ){
                         int index = (tentative - 1) * nb_letters + position; // tentative-1 car tentative déjà incrémentée
@@ -192,7 +192,7 @@ public class Game extends Initialize {
                     }
                 }
                 else{
-                    new ResultsEndGame("loose", type, motSecret, tentative);
+                    new ResultsEndGame("loose", type);
                 }
             }
         });
@@ -223,7 +223,7 @@ public class Game extends Initialize {
             return res;
         }
         else if (motPropose.equals(motSecret)){
-            new ResultsEndGame("win", type, motSecret, tentative);
+            new ResultsEndGame("win", type);
             dispose();
             return res;
         }

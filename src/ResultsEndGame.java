@@ -64,7 +64,7 @@ public class ResultsEndGame extends Initialize{
         
         FlowLayout buttonLayout = new FlowLayout(FlowLayout.CENTER,15,15);
         JPanel buttonPanel = new JPanel(buttonLayout);
-        buttonPanel.setBackground(new Color(0x101044));
+        buttonPanel.setBackground(motusColor);
 
         // Ajout du logo
         Image image = Toolkit.getDefaultToolkit().getImage(filename);

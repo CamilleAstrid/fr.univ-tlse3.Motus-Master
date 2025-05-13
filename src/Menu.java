@@ -1,14 +1,9 @@
 import javax.swing.*;
-import javax.swing.text.SimpleAttributeSet;
-import javax.swing.text.StyleConstants;
-import javax.swing.text.StyledDocument;
-
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
 public class Menu extends Initialize{
-
+    
     public Menu(){
         // Initialisation de la fenetre
         this.setTitle("Menu");
@@ -22,12 +17,11 @@ public class Menu extends Initialize{
         JButton Regles = new JButton("Règles");
         JButton Quitter = new JButton("Quitter");
 
-        FlowLayout buttonStartLayout = new FlowLayout(FlowLayout.CENTER,15,15);
-        JPanel buttonStartPanel= new JPanel(buttonStartLayout);
-        buttonStartPanel.setBackground(new Color(0x101044));
         FlowLayout buttonLayout = new FlowLayout(FlowLayout.CENTER,15,15);
+        JPanel buttonStartPanel= new JPanel(buttonLayout);
         JPanel buttonPanel = new JPanel(buttonLayout);
-        buttonPanel.setBackground(new Color(0x101044));
+        buttonStartPanel.setBackground(motusColor);
+        buttonPanel.setBackground(motusColor);
      
         // Ajout du logo
         Image image = Toolkit.getDefaultToolkit().getImage("../data/motus.png");
@@ -60,14 +54,13 @@ public class Menu extends Initialize{
         imagePanel.add(textMenu);
 
 
-
         buttonStartPanel.add(JcJ); buttonStartPanel.add(JcI); buttonStartPanel.add(IcI);
         buttonPanel.add(Regles); buttonPanel.add(Quitter);
 
         this.add(imagePanel, BorderLayout.CENTER);
         this.add(buttonStartPanel, BorderLayout.PAGE_START);
         this.add(buttonPanel, BorderLayout.PAGE_END);
-
+        
         //Listeners
         JcJ.addActionListener(new ActionListener() {
             @Override

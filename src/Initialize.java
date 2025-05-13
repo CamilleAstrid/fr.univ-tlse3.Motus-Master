@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Initialize extends JFrame{
+    static Color motusColor = new Color(0x101044);
 
     public Initialize(){
         Dimension currentScreenSize = getCurrentScreenSize();
@@ -9,7 +10,7 @@ public class Initialize extends JFrame{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
         this.setUndecorated(true);
-        this.getContentPane().setBackground(new Color(0x101044));
+        this.getContentPane().setBackground(motusColor);
     }
 
     public Dimension getCurrentScreenSize(){

@@ -24,7 +24,7 @@ Ce dépôt contient le code associé au jeu motus. Ce projet a été réalisé d
 
 ### Installation
    ```
-   git clone https://github.com/CamilleAstrid/fr.univ-tlse3.Motus-master.git
+   git clone https://github.com/CamilleAstrid/fr.univ-tlse3.Motus-Master.git
    cd fr.univ-tlse3.Motus-master.git
    ```
 ### Usages
@@ -32,7 +32,7 @@ Ce dépôt contient le code associé au jeu motus. Ce projet a été réalisé d
 🚧
 
 ## Licence
-Ce projet et donc l'ensemble des éléments de ce répertoire est sous licence [MIT](https://github.com/CamilleAstrid/fr.univ-tlse3.Motus-master/blob/master/LICENSE) (sauf cas précisé).
+Ce projet et donc l'ensemble des éléments de ce répertoire est sous licence [MIT](https://github.com/CamilleAstrid/fr.univ-tlse3.Motus-Master/blob/master/LICENSE) (sauf cas précisé).
 
 ## Citations et Références
 
