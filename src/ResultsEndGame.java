@@ -38,8 +38,8 @@ public class ResultsEndGame extends Initialize{
                 ;
         }
         else{
-            this.setTitle("Loose");
-            filename = "../data/loose.png";
+            this.setTitle("Lose");
+            filename = "../data/lose.png";
             text = "Oh le boulet !\n"
                 +"C'était une sacré longue partie...\n\n\n"
                 +"Faisons un bref récap de tes stats sur cette game :\n\n\n"
