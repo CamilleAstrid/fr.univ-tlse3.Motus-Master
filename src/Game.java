@@ -45,7 +45,7 @@ public class Game extends Initialize {
         for (int i = 0; i < essai * nb_letters; i++) {
             String letter;
             if (i%nb_letters == 0){
-                letter = String.valueOf(firstLetter) ;
+                letter = String.valueOf(firstLetter).toUpperCase() ;
             }
             else{
                 letter = " ";
@@ -190,6 +190,7 @@ public class Game extends Initialize {
                                 break;
                         }
                     }
+                    textField.setText("Proposer un mot de " + nb_letters + " lettres");
                 }
                 else{
                     new ResultsEndGame("loose", type, motSecret, tentative);

@@ -2,6 +2,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
+
 public class Menu extends Initialize{
     
     public Menu(){
@@ -33,9 +37,9 @@ public class Menu extends Initialize{
 
         JTextPane textMenu = new JTextPane();
         JLabel backgroundLabel = new JLabel(icon);
-        textMenu.setBackground(new Color(0x101044));
+        textMenu.setBackground(motusColor);
         textMenu.setForeground(new Color(0xFF33FF));
-        textMenu.setFont(new Font("Arial", Font.BOLD, 40));
+        textMenu.setFont(new Font("Arial", Font.BOLD, 30));
         textMenu.setEditable(false);
         textMenu.setText(text);
 
@@ -48,7 +52,7 @@ public class Menu extends Initialize{
         // Regroupe logo et texte
         JPanel imagePanel = new JPanel();
         imagePanel.setLayout(new BoxLayout(imagePanel, BoxLayout.X_AXIS));
-        imagePanel.setBackground(new Color(0x101044));
+        imagePanel.setBackground(motusColor);
         imagePanel.add(backgroundLabel);
         imagePanel.add(Box.createRigidArea(new Dimension(20, 0))); // espace
         imagePanel.add(textMenu);
@@ -65,7 +69,7 @@ public class Menu extends Initialize{
         JcJ.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent clic) {
-                new SelectionNumber("JcJ");
+                new SelectionDifficulte("JcJ");
                 dispose();
             }
         });
@@ -79,7 +83,7 @@ public class Menu extends Initialize{
         IcI.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent clic) {
-                new SelectionNumber("IcI");
+                new SelectionDifficulte("IcI");
                 dispose();
             }
         });

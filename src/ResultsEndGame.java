@@ -18,8 +18,8 @@ public class ResultsEndGame extends Initialize{
             filename = "../data/win.png";
             if (tentative==0)
                 text = "Faisons un bref récap de tes stats\n"
-                +"sur cette game :\n\n\n"
-                +"Le mot secret était :"+motSecret+"\n\n\n"
+                +"sur cette game.\n\n\n"
+                +"Le mot secret était : "+motSecret.substring(0, motSecret.length()-1)+"\n\n\n"
                 +"Tu l'as eu first try !\n\n\n"
                 +"Mouais, si tu veux mon avis..."
                 +"Arrête la triche et recommence !"
@@ -28,8 +28,8 @@ public class ResultsEndGame extends Initialize{
                 text = "GG, WP !\n"
                 +"C'était une sacré belle partie...\n\n\n"
                 +"Faisons un bref récap de tes stats sur cette game :\n\n\n"
-                +"Le mot secret était :"+motSecret+"\n"
-                +"okay tu l'as trouvé mais \n"
+                +"Le mot secret était : "+motSecret.substring(0, motSecret.length()-1)+"\n\n\n"
+                +"Okay tu l'as trouvé mais \n"
                 +"dans le cas où t'as juste gamble\n"
                 +"je te le donne pour ta culture !\n\n\n"
                 +"T'as essayé "+String.valueOf(tentative+1)+" fois...\n"
@@ -45,8 +45,8 @@ public class ResultsEndGame extends Initialize{
                 +"Faisons un bref récap de tes stats sur cette game :\n\n\n"
                 +"Et dire que t'as pas réussi à le trouver...\n"
                 +"t'es même pas bon à gamble.\n\n"
-                +"Le mot secret était :"+motSecret+"\n"
-                +"allez c'est cadeau,\n"
+                +"Le mot secret était : "+motSecret.substring(0, motSecret.length()-1)+"\n\n\n"
+                +"Allez c'est cadeau,\n"
                 +"je te le donne pour ta culture !\n\n\n"
                 +"T'as essayé "+String.valueOf(tentative+1)+" fois...\n"
                 +"Si tu veux mon avis, c'est "+String.valueOf(tentative)+" de trop !\n\n\n"
@@ -73,9 +73,9 @@ public class ResultsEndGame extends Initialize{
         
         // Ajout texte a cote du logo
         JTextPane textMenu = new JTextPane();
-        textMenu.setBackground(new Color(0x101044));
+        textMenu.setBackground(motusColor);
         textMenu.setForeground(new Color(0xFF33FF));
-        textMenu.setFont(new Font("Arial", Font.BOLD, 40));
+        textMenu.setFont(new Font("Arial", Font.BOLD, 30));
         textMenu.setEditable(false);
         textMenu.setText(text);
 
@@ -88,7 +88,7 @@ public class ResultsEndGame extends Initialize{
         // Regroupe logo et texte
         JPanel imagePanel = new JPanel();
         imagePanel.setLayout(new BoxLayout(imagePanel, BoxLayout.X_AXIS));
-        imagePanel.setBackground(new Color(0x101044));
+        imagePanel.setBackground(motusColor);
         imagePanel.add(backgroundLabel);
         imagePanel.add(Box.createRigidArea(new Dimension(20, 0))); // espace
         imagePanel.add(textMenu);
@@ -107,7 +107,7 @@ public class ResultsEndGame extends Initialize{
             @Override
             public void actionPerformed(ActionEvent clic){
                 if (type.equals("JcJ") || type.equals("IcI"))
-                    new SelectionNumber(type);
+                    new SelectionDifficulte(type);
                 else
                     new SelectionType();
                 dispose();

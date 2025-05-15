@@ -2,7 +2,7 @@ import javax.swing.JOptionPane;
 
 public class SelectionMot extends JOptionPane{
 
-    public SelectionMot(String type, int nb_letters){
+    public SelectionMot(String type, int nb_letters, String difficulte){
         String motSecret = "";
         LoadData mots = new LoadData(nb_letters);
         mots.generate();
@@ -30,14 +30,14 @@ public class SelectionMot extends JOptionPane{
                     "Erreur",
                     JOptionPane.ERROR_MESSAGE);
                 
-                new SelectionMot(type, nb_letters); // Relance la sélection du mot
+                new SelectionMot(type, nb_letters, difficulte); // Relance la sélection du mot
             }
             else {  // Vérifie si l'utilisateur n'a pas cliqué sur "Annuler"
                 motSecret = String.valueOf(selection);
                 String motSecretLisibleCSV = mots.motSecretLisibleCSV(motSecret);
 
                 while (!mots.liste.contains(motSecretLisibleCSV)){
-                    new SelectionMot(type, nb_letters); // Relance la sélection du mot
+                    new SelectionMot(type, nb_letters, difficulte); // Relance la sélection du mot
                 }
                 motSecret = motSecretLisibleCSV;
             }
@@ -46,6 +46,11 @@ public class SelectionMot extends JOptionPane{
             motSecret = mots.motSecret;
         }
         char firstLetter = motSecret.charAt(0);
-        new Game(type, nb_letters, motSecret, firstLetter);
+        if (difficulte=="normal"){
+            new Game(type, nb_letters, motSecret, firstLetter);
+        }
+        else if (difficulte=="easy"){
+            new GameEasy(type, nb_letters, motSecret, firstLetter);
+        }
     }
 }

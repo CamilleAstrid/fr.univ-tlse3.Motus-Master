@@ -26,6 +26,6 @@ public class SelectionType extends JOptionPane{
         }
         else
             new Menu();
-        new SelectionNumber(type);
+        new SelectionDifficulte(type);
     }
 }
