@@ -1,0 +1,1 @@
+Main-Class: fr.univ-tlse3.Motus-Master.bin.Menu
