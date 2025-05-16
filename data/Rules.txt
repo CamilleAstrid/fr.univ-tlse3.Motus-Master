@@ -9,7 +9,7 @@
     Votre seule arme : <em>la logique, la mémoire, et l’intuition</em>.</p>
 
     <ul>
-      <li>🟥 <strong>Carré rouge</strong> : lettre correcte et bien positionnée.</li>
+      <li> <body style='color:#FF0000;'>🟥</body> <strong>Carré rouge</strong> : lettre correcte et bien positionnée.</li>
       <li>🟡 <strong>Rond jaune</strong> : lettre présente mais mal placée.</li>
     </ul>
 
