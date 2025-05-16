@@ -1,42 +1,40 @@
 <html>
   <body style='background-color:#101044; color:#FF33FF; font-family:Arial,sans-serif; font-size:14px; padding:20px;'>
-    <h1 style='color:#FF007F;'>PROTOCOLE DE JEU<em>MOTUS-MASTER</em></h1>
-    <p><strong>Données cryptées. Accès joueur confirmé...</strong><br>
-    Bienvenue dans l’arène lexicale. Votre mission : <span style='color:#FFFF33;'>décrypter le mot-cible</span> avant que le système ne vous éjecte.</p>
-
-    <h2 style='color:#00FFFF;'>🎯 OBJECTIF</h2>
-    <p>Le <strong>mot secret</strong> est une chaîne de lettres dissimulée dans le système.<br>
-    Votre seule arme : <em>la logique, la mémoire, et l’intuition</em>.</p>
-
+    <h1 style='color:#FF007F;'>PROTOCOLE DE JEU : <em>MOTUS-MASTER</em></h1>
+    <br><br>
+    <p><strong>Données cryptées. Accès joueur confirmé...</strong><br><br>
+    Bienvenue dans l’arène lexicale !<br>
+    Votre mission : <span style='color:#00FFFF;'>décrypter le mot-cible</span> avant que le système ne vous éjecte.</p>
+    <br><br>
+    <h2 style='color:#FFFF33;'>🎯 OBJECTIF</h2>
+    <p>Le <strong>mot secret</strong> est une chaîne de lettres dissimulée dans le système. Votre seule arme : <em>la logique, la mémoire, et l’intuition</em>.</p>
+    <br>
     <ul>
       <li>🟥 <strong>Carré rouge</strong> : lettre correcte et bien positionnée.</li>
       <li>🟡 <strong>Rond jaune</strong> : lettre présente mais mal placée.</li>
     </ul>
 
-    <p>La première lettre est révélée.<br>
-    Le reste dépend de vos <span style='color:#00FFCC;'>capacités neuronales</span>.</p>
+    <p>La première lettre est révélée. Le reste dépend de vos <span style='color:#00FFFF;'>capacités neuronales</span>. Si tant est que vous en ayez.</p>
 
-    <h2 style='color:#00FFFF;'>⚠️ CONDITIONS D’ÉCHEC</h2>
+    <br><br>
+    <h2 style='color:#FFFF33;'>⚠️ CONDITIONS D’ÉCHEC</h2>
     <ul>
-      <li>Mot inexistant ou non référencé</li>
-      <li>Faute d’orthographe</li>
+      <li>Mot non référencé</li>
       <li>Longueur incorrecte</li>
       <li>Mot ne commençant pas par la lettre imposée</li>
-      <li>Nom propre</li>
-      <li>Verbe conjugué (infinitif/participe autorisés)</li>
     </ul>
 
-    <p><em>"Erreur de protocole détectée. Reprise de session interdite."</em></p>
-
-    <h2 style='color:#00FFFF;'>🔁 GRILLE DE DÉCRYPTAGE</h2>
+    <p><em><span style='color:#00FFFF;'>"Erreur de protocole détectée. Reprise de session interdite."</span></em></p>
+    <br><br>
+    <h2 style='color:#FFFF33;'>🔁 GRILLE DE DÉCRYPTAGE</h2>
     <ul>
       <li>Mot de 6 à 9 lettres</li>
       <li>6 essais maximum</li>
       <li><strong>Victoire</strong> : lettres rouges uniquement</li>
-      <li><strong>Défaite</strong> : mission échouée</li>
+      <li><strong>Défaite</strong> : mission échouée, pas de cookie !</li>
     </ul>
-
-    <h2 style='color:#00FFFF;'>🎮 MODES DE DIFFICULTÉ</h2>
+    <br><br>
+    <h2 style='color:#FFFF33;'>🎮 MODES DE DIFFICULTÉ</h2>
     <table border='1' cellpadding='4' style='border-collapse:collapse; color:#FFFFFF;'>
       <tr style='background-color:#202060;'>
         <th>Niveau</th><th>Tentatives</th><th>Aide</th><th>Temps</th>
@@ -51,9 +49,9 @@
         <td>🔴 DIFFICILE</td><td>6</td><td>Aucune</td><td><em>À venir</em></td>
       </tr>
     </table>
-    <p><em>"Choisissez bien, citoyen. Chaque décision est une empreinte dans le code."</em></p>
-
-    <h2 style='color:#00FFFF;'>⚔️ MODE ÉQUIPE (à venir)</h2>
+    <p><em><span style='color:#00FFFF;'>"Choisissez bien, citoyen. Chaque décision est une empreinte dans le code."</span></em></p>
+    <br><br>
+    <h2 style='color:#FFFF33;'>⚔️ MODE ÉQUIPE (à venir)</h2>
     <ul>
       <li>+50 points par mot correct, +100 pour le dernier</li>
       <li>Une erreur passe la main à l’équipe adverse</li>
@@ -61,6 +59,6 @@
       <li>À chaque main, une lettre supplémentaire révélée</li>
     </ul>
 
-    <p><em>"La triche ne sera pas tolérée. Mais elle sera soupçonnée."</em></p>
+    <p><em><span style='color:#00FFFF;'>"La triche ne sera pas tolérée. Mais elle sera soupçonnée."</span></em></p>
   </body>
 </html>
