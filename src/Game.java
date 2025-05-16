@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Game extends Initialize {
+    static String difficulte;
     static int essai;
     static int tentative;
     static ArrayList<String> badLetters;
@@ -13,7 +14,7 @@ public class Game extends Initialize {
 
     public Game(String type, int nb_letters, String motSecret, char firstLetter) {
         // Initialisation des paramètres
-        essai = 6; tentative = 0;
+        difficulte = "Normal"; essai = 6; tentative = 0;
         badLetters = new ArrayList<>(); goodPlace = new HashMap<>(); niceTry = new HashMap<>();
         Robot IA = new Robot();
 
@@ -38,7 +39,7 @@ public class Game extends Initialize {
 
         // Ajout de la grille de jeu
         JPanel panelWithGrid = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        JPanel gridPanel = new JPanel(new GridLayout(6, nb_letters));
+        JPanel gridPanel = new JPanel(new GridLayout(essai, nb_letters));
         panelWithGrid.setBackground(motusColor);
         ArrayList<CaseLabel> cases = new ArrayList<>();
 
@@ -193,7 +194,7 @@ public class Game extends Initialize {
                     textField.setText("Proposer un mot de " + nb_letters + " lettres");
                 }
                 else{
-                    new ResultsEndGame("loose", type, motSecret, tentative);
+                    new ResultsEndGame("loose", type, motSecret, tentative, difficulte);
                 }
             }
         });
@@ -224,7 +225,7 @@ public class Game extends Initialize {
             return res;
         }
         else if (motPropose.equals(motSecret)){
-            new ResultsEndGame("win", type, motSecret, tentative);
+            new ResultsEndGame("win", type, motSecret, tentative, difficulte);
             dispose();
             return res;
         }

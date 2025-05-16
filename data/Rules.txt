@@ -1,67 +1,66 @@
-Bienvenu aux nouveaux joueurs !
+<html>
+  <body style='background-color:#101044; color:#FF33FF; font-family:Arial,sans-serif; font-size:14px; padding:20px;'>
+    <h2 style='color:#FF007F;'>PROTOCOLE DE JEU : <em>MOTUS-MASTER</em></h2>
+    <p><strong>Données cryptées. Accès joueur confirmé...</strong><br>
+    Bienvenue dans l’arène lexicale. Votre mission : <span style='color:#FFFF33;'>décrypter le mot-cible</span> avant que le système ne vous éjecte.</p>
 
->"Qu'est-ce que Motus ? C'est une espèce de gymnastique du cerveau qui mélange les chiffres d'un côté et les lettres...
-  Il faut savoir aller vite, être logique et avoir envie de jouer."
-  "Ceux qui n'ont pas bien compris le fonctionnement du jeu, c'est très simple, je vous invite à jouer."
-  Thierry Beccaro le 25 juin 1990
-  https://youtu.be/EKRG1qAiVVI
+    <h3 style='color:#00FFFF;'>🎯 OBJECTIF</h3>
+    <p>Le <strong>mot secret</strong> est une chaîne de lettres dissimulée dans le système.<br>
+    Votre seule arme : <em>la logique, la mémoire, et l’intuition</em>.</p>
 
-Il faut trouver le mot secret à l'aide de proposition que le joueur fait.
+    <ul>
+      <li>🟥 <strong>Carré rouge</strong> : lettre correcte et bien positionnée.</li>
+      <li>🟡 <strong>Rond jaune</strong> : lettre présente mais mal placée.</li>
+    </ul>
 
-Pour la suite des explications, une "erreur" correspond à :
- - un mot n'existant pas,
- - un mot mal épelé,
- - un mot ne commençant pas par la lettre proposée,
- - un mot trop long ou trop court,
- - un nom propre,
- - verbe conjugué (hors infinitif, participe passé et présent)
-  
-Une grille se compose 7 à 9 lettres avec 6 tentatives maximum. La première lettre du mot proposé est affichée.
-Au moment de la proposition d'un nouveau mot apparaîtront :
-- un rond jaune quand la lettre est présente mais au mauvais endroit
-- un carré rouge quand la lettre est présente et au bon endroit
+    <p>La première lettre est révélée.<br>
+    Le reste dépend de vos <span style='color:#00FFCC;'>capacités neuronales</span>.</p>
 
-Quand toutes les lettres sont au bonne endroit, c'est gagné !
-Sinon, c'est perdu !
+    <h3 style='color:#00FFFF;'>⚠️ CONDITIONS D’ÉCHEC</h3>
+    <ul>
+      <li>Mot inexistant ou non référencé</li>
+      <li>Faute d’orthographe</li>
+      <li>Longueur incorrecte</li>
+      <li>Mot ne commençant pas par la lettre imposée</li>
+      <li>Nom propre</li>
+      <li>Verbe conjugué (infinitif/participe autorisés)</li>
+    </ul>
 
-/!\ A IMPLEMENTER ! (JcJcIA)
-Chaque bonne réponse octroie 50 points, sauf la dernière qui octroie 100 points.
-A la fin des tentatives, la main passe à l'équipe adverse (une seule tentative).
-A chaque erreur, la main passe à l'équipe adverse.
-Une lettre est alors ajoutée à chaque passage de main.
+    <p><em>"Erreur de protocole détectée. Reprise de session interdite."</em></p>
 
-La grille des scores est en 5x5. 
-Il faut remplir une ligne, colonne ou diagonale
-8 cases aléatoires déjà remplies
-17 boules avec les numéros des cases + 3 boules noires
-si boule noire la main va à l'équipe adverse (perd 20 points)
-si boule numérotée on remplit la case correspondante
-et on retire une fois
-chaque équipe possède les nombres pairs ou les nombres impairs
-  
-si une ligne est complète cela déclenche MOTUS
-on ajoute 100 points supplémentaires à l'équipe
-on réinitialise les grilles
-  
-En cas d'égalité, il y a un 9e mot qui fait gagner l'équipe qui le trouve 
-  
-Après 8 mots, on finit la première manche
-2 lettres proposées pour la super partie
-on passe à la super partie
-grille à remplir 5x5
-16 cases déjà remplies
-(1,1), (1,3), (1,5), (2,2), (2,3), (2,4), (3,1), (3,2), (3,4), (3,5), (4,2), (4,3), (4,4), (5,1), (5,3), (5,5)
-il faut éviter de faire une ligne
-on place des boules qui n'existe pas dans la grille aussi dans l'urne
-on ajoute alors une boule dorée
-au troisième mot, la boule du centre est ajoutée (3,3) qui fait perdre la partie du coup
-7 minutes pour trouver 5 mots
-1e mot trouvé, 1 boule tirée
-2e mot trouvé, 2 boules tirées
-3e mot on place la boule du centre
-3e mot trouvé, 3 boules tirées
-4e mot trouvé, 4 boules tirées
-5e mot trouvé, 5 boules tirées
-pour chaque erreur, on pioche une boule de plus
-si la balle dorée est tirée, elle est comme un jocker
-si une ligne est composée alors MOTUS ==> perdu
+    <h3 style='color:#00FFFF;'>🔁 GRILLE DE DÉCRYPTAGE</h3>
+    <ul>
+      <li>Mot de 6 à 9 lettres</li>
+      <li>6 essais maximum</li>
+      <li><strong>Victoire</strong> : lettres rouges uniquement</li>
+      <li><strong>Défaite</strong> : mission échouée</li>
+    </ul>
+
+    <h3 style='color:#00FFFF;'>🎮 MODES DE DIFFICULTÉ</h3>
+    <table border='1' cellpadding='4' style='border-collapse:collapse; color:#FFFFFF;'>
+      <tr style='background-color:#202060;'>
+        <th>Niveau</th><th>Tentatives</th><th>Aide</th><th>Temps</th>
+      </tr>
+      <tr>
+        <td>🟢 FACILE</td><td>10</td><td>Menu déroulant</td><td>Non</td>
+      </tr>
+      <tr>
+        <td>🟡 NORMAL</td><td>6</td><td>Aucune</td><td>Non</td>
+      </tr>
+      <tr>
+        <td>🔴 DIFFICILE</td><td>6</td><td>Aucune</td><td><em>À venir</em></td>
+      </tr>
+    </table>
+    <p><em>"Choisissez bien, citoyen. Chaque décision est une empreinte dans le code."</em></p>
+
+    <h3 style='color:#00FFFF;'>⚔️ MODE ÉQUIPE (à venir)</h3>
+    <ul>
+      <li>+50 points par mot correct, +100 pour le dernier</li>
+      <li>Une erreur passe la main à l’équipe adverse</li>
+      <li>L’équipe adverse a une tentative unique</li>
+      <li>À chaque main, une lettre supplémentaire révélée</li>
+    </ul>
+
+    <p><em>"La triche ne sera pas tolérée. Mais elle sera soupçonnée."</em></p>
+  </body>
+</html>

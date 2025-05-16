@@ -9,14 +9,19 @@ import java.awt.event.ActionListener;
 
 public class ResultsEndGame extends Initialize{
     
-    public ResultsEndGame(String etat, String type, String motSecret, int tentative){
+    public ResultsEndGame(String etat, String type, String motSecret, int tentative, String difficulte){
         String filename;
         String text="";
+        String name="";
+
+        if (difficulte.equals("Facile")){
+            name = "rmdLore_";
+        }
 
         if (etat.equals("win")){
             this.setTitle("Victory");
-            filename = "../data/win.png";
-            if (tentative==0)
+            if (tentative==0){
+                filename = "../data/"+name+"triche.png";
                 text = "Faisons un bref récap de tes stats\n"
                 +"sur cette game.\n\n\n"
                 +"Le mot secret était : "+motSecret.substring(0, motSecret.length()-1)+"\n\n\n"
@@ -24,7 +29,9 @@ public class ResultsEndGame extends Initialize{
                 +"Mouais, si tu veux mon avis..."
                 +"Arrête la triche et recommence !"
                 ;
-            else
+            }
+            else{
+                filename = "../data/"+name+"win.png";
                 text = "GG, WP !\n"
                 +"C'était une sacré belle partie...\n\n\n"
                 +"Faisons un bref récap de tes stats sur cette game :\n\n\n"
@@ -36,10 +43,11 @@ public class ResultsEndGame extends Initialize{
                 +"Si tu veux mon avis, c'est "+String.valueOf(tentative)+" de trop !\n\n\n"
                 +"Allez recommence mon grand !"
                 ;
+            }
         }
         else{
             this.setTitle("Lose");
-            filename = "../data/lose.png";
+            filename = "../data/"+name+"lose.png";
             text = "Oh le boulet !\n"
                 +"C'était une sacré longue partie...\n\n\n"
                 +"Faisons un bref récap de tes stats sur cette game :\n\n\n"
@@ -66,12 +74,15 @@ public class ResultsEndGame extends Initialize{
         JPanel buttonPanel = new JPanel(buttonLayout);
         buttonPanel.setBackground(motusColor);
 
-        // Ajout du logo
+        // Ajout de l'image
         Image image = Toolkit.getDefaultToolkit().getImage(filename);
-        ImageIcon icon = new ImageIcon(image);
+        Dimension tailleImage = getCurrentScreenSize();
+        double hauteurImage = (int) (tailleImage.getHeight())*0.95;
+        Image imageScaled = image.getScaledInstance(-1, (int) hauteurImage,  java.awt.Image.SCALE_SMOOTH ) ;
+        ImageIcon icon = new ImageIcon(imageScaled);
         JLabel backgroundLabel = new JLabel(icon);
         
-        // Ajout texte a cote du logo
+        // Ajout texte a cote de l'image
         JTextPane textMenu = new JTextPane();
         textMenu.setBackground(motusColor);
         textMenu.setForeground(new Color(0xFF33FF));
@@ -84,8 +95,7 @@ public class ResultsEndGame extends Initialize{
         StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
         doc.setParagraphAttributes(0, doc.getLength(), center, false);
 
-
-        // Regroupe logo et texte
+        // Regroupe image et texte
         JPanel imagePanel = new JPanel();
         imagePanel.setLayout(new BoxLayout(imagePanel, BoxLayout.X_AXIS));
         imagePanel.setBackground(motusColor);

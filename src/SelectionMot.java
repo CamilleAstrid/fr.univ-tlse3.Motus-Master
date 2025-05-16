@@ -45,11 +45,13 @@ public class SelectionMot extends JOptionPane{
         else{
             motSecret = mots.motSecret;
         }
+
         char firstLetter = motSecret.charAt(0);
-        if (difficulte=="normal"){
+
+        if (difficulte.equals("Normal")){
             new Game(type, nb_letters, motSecret, firstLetter);
         }
-        else if (difficulte=="easy"){
+        else if (difficulte.equals("Facile")){
             new GameEasy(type, nb_letters, motSecret, firstLetter);
         }
     }

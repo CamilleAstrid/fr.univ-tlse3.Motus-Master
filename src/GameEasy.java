@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class GameEasy extends Initialize {
+    static String difficulte;
     static int essai;
     static int tentative;
     static ArrayList<String> badLetters;
@@ -13,7 +14,7 @@ public class GameEasy extends Initialize {
 
     public GameEasy(String type, int nb_letters, String motSecret, char firstLetter) {
         // Initialisation des paramètres
-        essai = 10; tentative = 0;
+        essai = 10; tentative = 0; difficulte = "Facile";
         badLetters = new ArrayList<>(); goodPlace = new HashMap<>(); niceTry = new HashMap<>();
         Robot IA = new Robot();
 
@@ -30,16 +31,14 @@ public class GameEasy extends Initialize {
 
         // Ajout du logo
         Image image = Toolkit.getDefaultToolkit().getImage("../data/motus.png");
-        Image scaledImage = image.getScaledInstance(200, 200, image.SCALE_SMOOTH);
+        Image scaledImage = image.getScaledInstance(-1, 200, image.SCALE_SMOOTH);
         ImageIcon icon = new ImageIcon(scaledImage);
         JLabel backgroundLabel = new JLabel(icon);
         backgroundLabel.setBounds(0, 0, getWidth(), getHeight());
         topPanel.add(backgroundLabel, CENTER_ALIGNMENT);
 
         // Ajout de la grille de jeu
-        JPanel panelWithGrid = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        JPanel gridPanel = new JPanel(new GridLayout(6, nb_letters));
-        panelWithGrid.setBackground(motusColor);
+        JPanel gridPanel = new JPanel(new GridLayout(essai, nb_letters));
         ArrayList<CaseLabel> cases = new ArrayList<>();
 
         for (int i = 0; i < essai * nb_letters; i++) {
@@ -59,8 +58,7 @@ public class GameEasy extends Initialize {
             gridPanel.add(textArea); // Ajouter la case à la grille
             cases.add(textArea);
         }
-        panelWithGrid.add(gridPanel);
-        topPanel.add(panelWithGrid);
+        topPanel.add(gridPanel);
 
         // Ajout de la zone de texte et du bouton "valider"
         FlowLayout proposePanelLayout = new FlowLayout(FlowLayout.CENTER);
@@ -71,6 +69,9 @@ public class GameEasy extends Initialize {
         LoadData liste = new LoadData(nb_letters);
         liste.generate();
         Object propositions[] = liste.liste.toArray();
+        for (int i=0; i<liste.liste.size(); i++){
+            propositions[i] = propositions[i].toString().substring(0,nb_letters);
+        }
         selectionMotPropose = new JComboBox(propositions);
 
         proposePanel.add(selectionMotPropose);
@@ -129,14 +130,6 @@ public class GameEasy extends Initialize {
             }
         });
 
-        // Ajout du listener pour la zone de texte
-        selectionMotPropose.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent entree){
-                validateButton.doClick();
-            }
-        });
-        
         // Ajout du listener pour le bouton "valider"
         validateButton.addActionListener(new ActionListener() {
             @Override
@@ -179,7 +172,7 @@ public class GameEasy extends Initialize {
                     }
                 }
                 else{
-                    new ResultsEndGame("loose", type, motSecret, tentative);
+                    new ResultsEndGame("loose", type, motSecret, tentative, difficulte);
                 }
             }
         });
@@ -210,7 +203,7 @@ public class GameEasy extends Initialize {
             return res;
         }
         else if (motPropose.equals(motSecret)){
-            new ResultsEndGame("win", type, motSecret, tentative);
+            new ResultsEndGame("win", type, motSecret, tentative, difficulte);
             dispose();
             return res;
         }

@@ -4,7 +4,6 @@ import javax.swing.JOptionPane;
 public class SelectionNumber extends JOptionPane{
 
     public SelectionNumber(String type, String difficulte){
-        int nb_letters = 6; // Valeur par défaut        
         ArrayList<String> options = new ArrayList<String>();
         options.add("6"); options.add("7"); options.add("8"); options.add("9");
 
@@ -22,7 +21,7 @@ public class SelectionNumber extends JOptionPane{
         // Ajout du listener quand on clique sur OK dans la boite de dialogue
         if (selection != null) {  // Vérifie si l'utilisateur n'a pas cliqué sur "Annuler"
             String selectedOption = String.valueOf(selection);
-            nb_letters = Integer.parseInt(selectedOption);
+            int nb_letters = Integer.parseInt(selectedOption);
             new SelectionMot(type, nb_letters, difficulte);
         }
         else
