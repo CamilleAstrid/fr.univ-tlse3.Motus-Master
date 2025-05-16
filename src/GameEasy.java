@@ -52,9 +52,10 @@ public class GameEasy extends Initialize {
             CaseLabel textArea = new CaseLabel(letter);
             textArea.setEtat("none");
             textArea.setPreferredSize(new Dimension(50, 50));  // Taille des cases
-            textArea.setBackground(Color.white); // Couleur de fond des cases
-            textArea.setFont(new Font("Arial", Font.PLAIN, 20)); // Format de police des cases
-            textArea.setBorder(BorderFactory.createLineBorder(Color.CYAN, 2)); // Ajouter des bordures cyan néon visibles à la case
+            textArea.setBackground(Color.blue); // Couleur de fond des cases
+            textArea.setForeground(Color.white);
+            textArea.setFont(new Font("Arial", Font.BOLD, 20)); // Format de police des cases
+            textArea.setBorder(BorderFactory.createLineBorder(Color.black, 2)); // Ajouter des bordures cyan néon visibles à la case
             gridPanel.add(textArea); // Ajouter la case à la grille
             cases.add(textArea);
         }
