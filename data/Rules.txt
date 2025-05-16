@@ -1,22 +1,22 @@
 <html>
   <body style='background-color:#101044; color:#FF33FF; font-family:Arial,sans-serif; font-size:14px; padding:20px;'>
-    <h2 style='color:#FF007F;'>PROTOCOLE DE JEU : <em>MOTUS-MASTER</em></h2>
+    <h1 style='color:#FF007F;'>PROTOCOLE DE JEU<em>MOTUS-MASTER</em></h1>
     <p><strong>Données cryptées. Accès joueur confirmé...</strong><br>
     Bienvenue dans l’arène lexicale. Votre mission : <span style='color:#FFFF33;'>décrypter le mot-cible</span> avant que le système ne vous éjecte.</p>
 
-    <h3 style='color:#00FFFF;'>🎯 OBJECTIF</h3>
+    <h2 style='color:#00FFFF;'>🎯 OBJECTIF</h2>
     <p>Le <strong>mot secret</strong> est une chaîne de lettres dissimulée dans le système.<br>
     Votre seule arme : <em>la logique, la mémoire, et l’intuition</em>.</p>
 
     <ul>
-      <li> <body style='color:#FF0000;'>🟥</body> <strong>Carré rouge</strong> : lettre correcte et bien positionnée.</li>
+      <li>🟥 <strong>Carré rouge</strong> : lettre correcte et bien positionnée.</li>
       <li>🟡 <strong>Rond jaune</strong> : lettre présente mais mal placée.</li>
     </ul>
 
     <p>La première lettre est révélée.<br>
     Le reste dépend de vos <span style='color:#00FFCC;'>capacités neuronales</span>.</p>
 
-    <h3 style='color:#00FFFF;'>⚠️ CONDITIONS D’ÉCHEC</h3>
+    <h2 style='color:#00FFFF;'>⚠️ CONDITIONS D’ÉCHEC</h2>
     <ul>
       <li>Mot inexistant ou non référencé</li>
       <li>Faute d’orthographe</li>
@@ -28,7 +28,7 @@
 
     <p><em>"Erreur de protocole détectée. Reprise de session interdite."</em></p>
 
-    <h3 style='color:#00FFFF;'>🔁 GRILLE DE DÉCRYPTAGE</h3>
+    <h2 style='color:#00FFFF;'>🔁 GRILLE DE DÉCRYPTAGE</h2>
     <ul>
       <li>Mot de 6 à 9 lettres</li>
       <li>6 essais maximum</li>
@@ -36,7 +36,7 @@
       <li><strong>Défaite</strong> : mission échouée</li>
     </ul>
 
-    <h3 style='color:#00FFFF;'>🎮 MODES DE DIFFICULTÉ</h3>
+    <h2 style='color:#00FFFF;'>🎮 MODES DE DIFFICULTÉ</h2>
     <table border='1' cellpadding='4' style='border-collapse:collapse; color:#FFFFFF;'>
       <tr style='background-color:#202060;'>
         <th>Niveau</th><th>Tentatives</th><th>Aide</th><th>Temps</th>
@@ -53,7 +53,7 @@
     </table>
     <p><em>"Choisissez bien, citoyen. Chaque décision est une empreinte dans le code."</em></p>
 
-    <h3 style='color:#00FFFF;'>⚔️ MODE ÉQUIPE (à venir)</h3>
+    <h2 style='color:#00FFFF;'>⚔️ MODE ÉQUIPE (à venir)</h2>
     <ul>
       <li>+50 points par mot correct, +100 pour le dernier</li>
       <li>Une erreur passe la main à l’équipe adverse</li>
