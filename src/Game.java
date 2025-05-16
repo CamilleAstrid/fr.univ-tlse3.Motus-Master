@@ -245,8 +245,4 @@ public class Game extends Initialize {
             return res;
         }
     }
-
-    public static void main(String[] args) {
-        new Game("IcI", 6, "police", "p".charAt(0));
-    }
 }

@@ -4,7 +4,7 @@ import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class GameEasy extends Initialize {
+public class GameHard extends Initialize {
     static String difficulte;
     static int essai;
     static int tentative;
@@ -12,9 +12,9 @@ public class GameEasy extends Initialize {
     static HashMap<String, String> goodPlace;
     static HashMap<String,String> niceTry;
 
-    public GameEasy(String type, int nb_letters, String motSecret, char firstLetter) {
+    public GameHard(String type, int nb_letters, String motSecret, char firstLetter) {
         // Initialisation des paramètres
-        essai = 10; tentative = 0; difficulte = "Facile";
+        difficulte = "Normal"; essai = 6; tentative = 0;
         badLetters = new ArrayList<>(); goodPlace = new HashMap<>(); niceTry = new HashMap<>();
         Robot IA = new Robot();
 
@@ -31,14 +31,16 @@ public class GameEasy extends Initialize {
 
         // Ajout du logo
         Image image = Toolkit.getDefaultToolkit().getImage("../data/motus.png");
-        Image scaledImage = image.getScaledInstance(-1, 200, image.SCALE_SMOOTH);
+        Image scaledImage = image.getScaledInstance(200, 200, image.SCALE_SMOOTH);
         ImageIcon icon = new ImageIcon(scaledImage);
         JLabel backgroundLabel = new JLabel(icon);
         backgroundLabel.setBounds(0, 0, getWidth(), getHeight());
         topPanel.add(backgroundLabel, CENTER_ALIGNMENT);
 
         // Ajout de la grille de jeu
+        JPanel panelWithGrid = new JPanel(new FlowLayout(FlowLayout.CENTER));
         JPanel gridPanel = new JPanel(new GridLayout(essai, nb_letters));
+        panelWithGrid.setBackground(motusColor);
         ArrayList<CaseLabel> cases = new ArrayList<>();
 
         for (int i = 0; i < essai * nb_letters; i++) {
@@ -59,23 +61,25 @@ public class GameEasy extends Initialize {
             gridPanel.add(textArea); // Ajouter la case à la grille
             cases.add(textArea);
         }
-        topPanel.add(gridPanel);
+        panelWithGrid.add(gridPanel);
+        topPanel.add(panelWithGrid);
 
         // Ajout de la zone de texte et du bouton "valider"
         FlowLayout proposePanelLayout = new FlowLayout(FlowLayout.CENTER);
         JPanel proposePanel = new JPanel(proposePanelLayout);
         proposePanel.setBackground(motusColor);
 
-        JComboBox<String> selectionMotPropose;
-        LoadData liste = new LoadData(nb_letters);
-        liste.generate();
-        Object propositions[] = liste.liste.toArray();
-        for (int i=0; i<liste.liste.size(); i++){
-            propositions[i] = propositions[i].toString().substring(0,nb_letters);
+        String affichage = motSecret.replace(",", "");
+        JTextField textField = new JTextField(affichage);
+        textField.setBackground(Color.white);
+        textField.setFont(new Font("Arial", Font.PLAIN, 20));
+        textField.setEditable(false);
+        textField.setForeground(Color.black);
+        if (type.equals("N") || type.equals("JcJ")){
+            textField.setEditable(true);
+            textField.setText("Proposer un mot de " + nb_letters + " lettres");
         }
-        selectionMotPropose = new JComboBox(propositions);
-
-        proposePanel.add(selectionMotPropose);
+        proposePanel.add(textField);
 
         JButton validateButton = new JButton("Suivant");
         if (type.equals("N") || type.equals("JcJ")){
@@ -131,13 +135,28 @@ public class GameEasy extends Initialize {
             }
         });
 
+        // Ajout du listener pour la zone de texte
+        textField.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent evt) {
+                if (type.equals("N")|| type.equals("JcJ"))
+                    textField.setText(null);
+            }
+        });
+        textField.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent entree){
+                validateButton.doClick();
+            }
+        });
+        
         // Ajout du listener pour le bouton "valider"
         validateButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent clic) {
                 String motPropose = "";
                 if (type.equals("N") || type.equals("JcJ")){
-                    motPropose = String.valueOf(selectionMotPropose.getSelectedItem());
+                    motPropose = textField.getText();
                 }
                 else{
                     motPropose = IA.proposerMot(nb_letters, motSecret, tentative, badLetters, goodPlace, niceTry);
@@ -147,7 +166,9 @@ public class GameEasy extends Initialize {
                     
                 ArrayList<String> check = verifierMot(motSecret, motPropose, nb_letters, type);
 
-                if (tentative!=essai-1){
+                if (check.isEmpty())
+                    textField.setText("Proposer un mot de " + nb_letters + " lettres");
+                else if (tentative!=essai-1){
                     tentative++;
                     for (int position = 0; position<nb_letters; position++ ){
                         int index = (tentative - 1) * nb_letters + position; // tentative-1 car tentative déjà incrémentée
@@ -171,6 +192,7 @@ public class GameEasy extends Initialize {
                                 break;
                         }
                     }
+                    textField.setText("Proposer un mot de " + nb_letters + " lettres");
                 }
                 else{
                     new ResultsEndGame("loose", type, motSecret, tentative, difficulte);
