@@ -5,18 +5,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class GameHard extends Initialize {
-    static String difficulte;
-    static int essai;
-    static int tentative;
-    static ArrayList<String> badLetters;
-    static HashMap<String, String> goodPlace;
-    static HashMap<String,String> niceTry;
-
+    static String difficulte; static Chrono time;
+    static int essai; static int tentative;
+    static ArrayList<String> badLetters; static HashMap<String, String> goodPlace; static HashMap<String,String> niceTry;
+    
     public GameHard(String type, int nb_letters, String motSecret, char firstLetter) {
         // Initialisation des paramètres
-        difficulte = "Normal"; essai = 6; tentative = 0;
+        difficulte = "Difficile"; essai = 6; tentative = 0;
         badLetters = new ArrayList<>(); goodPlace = new HashMap<>(); niceTry = new HashMap<>();
-        Robot IA = new Robot();
+        Robot IA = new Robot(); time = new Chrono();
 
         // Initialisation de la fenêtre
         this.setTitle("Motus-Master");
@@ -204,6 +201,12 @@ public class GameHard extends Initialize {
     }
 
     public ArrayList<String> verifierMot(String motSecret, String motPropose, int nb_letters, String type){
+        time.pause();
+        int verifMintime = time.getDureeMin();
+        if (verifMintime > 5)
+            new ResultsEndGame("loose", type, motSecret, tentative, difficulte);
+            time.stop();
+        time.resume();
         ArrayList<String> res = new ArrayList<>();
         char firstLetter = motSecret.charAt(0);
         LoadData mots = new LoadData(nb_letters);
@@ -227,6 +230,7 @@ public class GameHard extends Initialize {
         }
         else if (motPropose.equals(motSecret)){
             new ResultsEndGame("win", type, motSecret, tentative, difficulte);
+            time.stop();
             dispose();
             return res;
         }
@@ -245,4 +249,6 @@ public class GameHard extends Initialize {
             return res;
         }
     }
+
+
 }

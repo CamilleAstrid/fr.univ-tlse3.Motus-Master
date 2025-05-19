@@ -54,5 +54,8 @@ public class SelectionMot extends JOptionPane{
         else if (difficulte.equals("Facile")){
             new GameEasy(type, nb_letters, motSecret, firstLetter);
         }
+        else{
+            new GameHard(type, nb_letters, motSecret, firstLetter);
+        }
     }
 }
