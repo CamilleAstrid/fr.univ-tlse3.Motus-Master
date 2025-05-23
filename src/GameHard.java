@@ -5,16 +5,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class GameHard extends Initialize {
-    static String difficulte; static Chrono time;
+    static String difficulte; int tropTard; static Timer swingTimer; static boolean checkTime;
     static int essai; static int tentative;
     static ArrayList<String> badLetters; static HashMap<String, String> goodPlace; static HashMap<String,String> niceTry;
     
     public GameHard(String type, int nb_letters, String motSecret, char firstLetter) {
         // Initialisation des paramètres
-        difficulte = "Difficile"; essai = 6; tentative = 0;
+        difficulte = "Difficile"; essai = 6; tentative = 0; checkTime = false;
         badLetters = new ArrayList<>(); goodPlace = new HashMap<>(); niceTry = new HashMap<>();
-        Robot IA = new Robot(); time = new Chrono();
-
+        Robot IA = new Robot(); tropTard = 1;
+    
         // Initialisation de la fenêtre
         this.setTitle("Motus-Master");
         this.setBackground(motusColor);
@@ -33,6 +33,41 @@ public class GameHard extends Initialize {
         JLabel backgroundLabel = new JLabel(icon);
         backgroundLabel.setBounds(0, 0, getWidth(), getHeight());
         topPanel.add(backgroundLabel, CENTER_ALIGNMENT);
+
+        // Mise en place du compteur
+        long startTime = System.currentTimeMillis();
+        int totalSeconds = tropTard * 60;
+        JTextPane timer = new JTextPane();
+        swingTimer = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                long now = System.currentTimeMillis();
+                long elapsed = (now - startTime) / 1000;
+                long remaining = totalSeconds - elapsed;
+
+                if (remaining <= 0) {
+                    checkTime=true;
+                    ((Timer) e.getSource()).stop();
+                    new ResultsEndGame("lose", type, motSecret, tentative, difficulte);
+                    dispose();
+                } else {
+                    long minutes = remaining / 60;
+                    long seconds = remaining % 60;
+                    timer.setText(String.format("Explosion iminante [%02d:%02d]", minutes, seconds));
+                }
+            }
+        });
+        if (checkTime){
+            swingTimer.stop();
+            new ResultsEndGame("lose", type, motSecret, tentative, difficulte);
+            dispose();
+        }
+        timer.setEditable(false);
+        timer.setOpaque(false);
+        timer.setBorder(null);
+        timer.setFont(new Font("Consolas", Font.BOLD, 20));
+        timer.setForeground(Color.CYAN);
+        swingTimer.start();
 
         // Ajout de la grille de jeu
         JPanel panelWithGrid = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -102,6 +137,7 @@ public class GameHard extends Initialize {
         bottomPanel.add(rulesButton);
         bottomPanel.add(menuButton);
         bottomPanel.add(quitButton);
+        bottomPanel.add(timer);
 
 
         JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, topPanel, bottomPanel);
@@ -193,6 +229,7 @@ public class GameHard extends Initialize {
                 }
                 else{
                     new ResultsEndGame("loose", type, motSecret, tentative, difficulte);
+                    swingTimer.stop();
                 }
             }
         });
@@ -201,12 +238,6 @@ public class GameHard extends Initialize {
     }
 
     public ArrayList<String> verifierMot(String motSecret, String motPropose, int nb_letters, String type){
-        time.pause();
-        int verifMintime = time.getDureeMin();
-        if (verifMintime > 5)
-            new ResultsEndGame("loose", type, motSecret, tentative, difficulte);
-            time.stop();
-        time.resume();
         ArrayList<String> res = new ArrayList<>();
         char firstLetter = motSecret.charAt(0);
         LoadData mots = new LoadData(nb_letters);
@@ -230,7 +261,7 @@ public class GameHard extends Initialize {
         }
         else if (motPropose.equals(motSecret)){
             new ResultsEndGame("win", type, motSecret, tentative, difficulte);
-            time.stop();
+            swingTimer.stop();
             dispose();
             return res;
         }
