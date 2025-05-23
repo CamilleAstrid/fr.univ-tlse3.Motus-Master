@@ -264,6 +264,8 @@ Ce projet et donc l'ensemble des éléments de ce répertoire est sous licence [
 
 ## Citations et Références
 
+**Toute ressemblance avec des faits et des personnages existants ou ayant existé serait purement fortuite et ne pourrait être que le fruit d'une pure coïncidence.**
+
 La première émission du jeu télévisé MOTUS : [BAFFF](https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://www.youtube.com/watch%3Fv%3D5SEbbjTvbdc&ved=2ahUKEwiMi8_u26iNAxUMVaQEHYN6MjEQtwJ6BAgfEAI&usg=AOvVaw1aRx66XZFw0AHce1u1mFU-)
 
 <img src="data/BAFFF.jpg" width="200" />
