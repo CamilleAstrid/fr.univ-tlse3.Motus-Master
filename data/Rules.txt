@@ -46,7 +46,7 @@
         <td>🟡 NORMAL</td><td>6</td><td>Aucune</td><td>Non</td>
       </tr>
       <tr>
-        <td>🔴 DIFFICILE</td><td>6</td><td>Aucune</td><td><em>À venir</em></td>
+        <td>🔴 DIFFICILE</td><td>6</td><td>Aucune</td><td>Oui</td>
       </tr>
     </table>
     <p><em><span style='color:#00FFFF;'>"Choisissez bien, citoyen. Chaque décision est une empreinte dans le code."</span></em></p>
